@@ -37,7 +37,7 @@ function unshiftExample(arr, element) {
   console.log("Original Array:", arr);
 
   arr.unshift(element);
-  console.log("After unshift:", arr);
+  console.log("After unshift:", arr); // adds value in the front of the array
 }
 unshiftExample([1, 2, 3], 0);
 
@@ -48,14 +48,17 @@ function concatExample(arr1, arr2) {
   let arr3 = arr1.concat(arr2);
   console.log("After concat:", arr3);
 }
-concatExample([1, 2, 3], [4, 5, 6]);
+concatExample([1, 2, 3], [4, 5, 6]); // merges two array
 
-// forEach()
+// in push second argument is a number and in concat second argument is a number
+
+// forEach() is used to iterate over an array but it wants a function as a argument
+// and it will call that function for element of the array.
 function forEachExample(arr) {
   console.log("Original Array:", arr);
 
   arr.forEach(function(item, index) {
-    console.log(item, index);
+    console.log(item, index); 
   });
 }
 forEachExample([1, 2, 3]);
