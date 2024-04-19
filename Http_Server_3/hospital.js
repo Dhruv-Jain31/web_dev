@@ -57,5 +57,28 @@ app.post("/",function(req,res){
  +  ", number of kidneys: "+ users[0].kidneys.length);
 })
 
+app.put("/",function(req,res){
+    for (let i = 0; i < users[0].kidneys.length; i++){
+        users[0].kidneys[i].healthy = true;
+    }
+    res.send("all kidneys are updated to healthy ones")
 
-app.listen(3003);
+})
+
+app.delete("/",function(req,res){
+    const newKidneys = []
+    for (let i = 0; i < users[0].kidneys.length; i++){
+        if (users[0].kidneys[i].healthy){
+            newKidneys.push({
+                healthy: true
+            })
+        }
+    }
+    users[0].kidneys = newKidneys;
+    res.send("all unhealthy kidneys are removed");
+})
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
