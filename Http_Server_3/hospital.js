@@ -66,18 +66,33 @@ app.put("/",function(req,res){
 })
 
 app.delete("/",function(req,res){
-    const newKidneys = []
-    for (let i = 0; i < users[0].kidneys.length; i++){
-        if (users[0].kidneys[i].healthy){
-            newKidneys.push({
-                healthy: true
-            })
+    if (at_least_one_unhealthy_kidney()){
+        const newKidneys = []
+        for (let i = 0; i < users[0].kidneys.length; i++){
+            if (users[0].kidneys[i].healthy){
+                newKidneys.push({
+                    healthy: true
+                })
+            }
         }
+        users[0].kidneys = newKidneys;
+        res.send("all kidneys are updated to healthier ones");
     }
-    users[0].kidneys = newKidneys;
-    res.send("all unhealthy kidneys are removed");
+    else{
+        res.status(411).send("no unhealthy kidneys found");
+    }
+
 })
 
+function at_least_one_unhealthy_kidney(){
+    let at_least_one_unhealthy_kidney = false;
+    for (let i = 0; i < users[0].kidneys.length; i++){
+        if (!users[0].kidneys[i].healthy){
+            at_least_one_unhealthy_kidney = true;
+        }
+    }
+    return at_least_one_unhealthy_kidney
+}
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
