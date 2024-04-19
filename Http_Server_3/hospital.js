@@ -58,10 +58,15 @@ app.post("/",function(req,res){
 })
 
 app.put("/",function(req,res){
-    for (let i = 0; i < users[0].kidneys.length; i++){
-        users[0].kidneys[i].healthy = true;
+    if (at_least_one_unhealthy_kidney()){
+        for (let i =0; i < users[0].kidneys.length; i++){
+            users[0].kidneys[i].healthy = true;
+        }
+        res.send("all kidneys are updated to healthy ones")
     }
-    res.send("all kidneys are updated to healthy ones")
+    else{
+        res.status(411).send("all kidneys are healthy. Have nothing to delete");
+    }
 
 })
 
@@ -76,7 +81,7 @@ app.delete("/",function(req,res){
             }
         }
         users[0].kidneys = newKidneys;
-        res.send("all kidneys are updated to healthier ones");
+        res.send("all unhealthy kidneys are deleted");
     }
     else{
         res.status(411).send("no unhealthy kidneys found");
@@ -84,6 +89,7 @@ app.delete("/",function(req,res){
 
 })
 
+// this below function is used to check the edge cases.
 function at_least_one_unhealthy_kidney(){
     let at_least_one_unhealthy_kidney = false;
     for (let i = 0; i < users[0].kidneys.length; i++){
