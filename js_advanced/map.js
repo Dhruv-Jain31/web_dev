@@ -1,5 +1,6 @@
 //create a map function that takes 2 inputs an array and a transformation function and 
 //transforms the array into a new one using the transformation function in javascript.
+// map is a "GLOBAL JS" function
 
 function own_map(array,transform){
 
