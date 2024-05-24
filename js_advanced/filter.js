@@ -14,3 +14,6 @@ const ans = arr.filter(function logic(n){  // n is the individual value of the a
     }
 
 });
+
+console.log(ans); // true values are pushed into new array and this line has to be written outside
+// function logic
