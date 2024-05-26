@@ -7,6 +7,7 @@ const calculate_requests = 0
 function number_of_requests(req,res,next) {
     calculate_requests += 1
     console.log("no.of requests on server are",calculate_requests)
+    next()
 }
 
 app.use(number_of_requests)
@@ -46,6 +47,7 @@ function heartMiddleware(req,res,next){
     }
 }
 
+// this function does the user checks only so it calls usermiddleware only
 app.get("/health_checkup", userMiddleware,function(req,res){
 
     // requied logic
