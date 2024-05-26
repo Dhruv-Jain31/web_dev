@@ -8,13 +8,14 @@ app.get("/health_checkup",function(req,res){
     const password = req.headers.password;
     const kidneyId = req.query.kidneyId;
 
-    if (username != "dhruv" && password != "pass") {
-        res.status(411).json({"msg": "wrong inputs given"})
+    if (username != "dhruv" || password != "pass") {
+        res.status(400).json({"msg": "wrong inputs given"})
         return
     }
 
-    if (kidneyId != 1 || kidneyId != "2") {
-        res.status(411).json({"msg": "invalid inputs given"})
+    if (kidneyId != "1" && kidneyId != "2") {
+        res.status(400).json({"msg": "invalid inputs given"})
+        return
     }
 
     res.status(200).send("checks done. WELCOME!!")
