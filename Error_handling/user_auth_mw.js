@@ -73,7 +73,7 @@ app.get("/heart_checkup",userMiddleware,heartMiddleware,function(req,res){
 
 app.use (function(err,req,res,next){
 
-    res.json({
+    res.status(500).json({
         "msg" : "Sorry there is a issue with our Server"
     })
 })
