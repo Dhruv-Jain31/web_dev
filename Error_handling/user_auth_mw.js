@@ -69,4 +69,13 @@ app.get("/heart_checkup",userMiddleware,heartMiddleware,function(req,res){
     res.status(200).send("heart checkup successfull")
 })
 
+// global catch: middleware with 4 inputs used to handle exceptions.
+
+app.use (function(err,req,res,next){
+
+    res.json({
+        "msg" : "Sorry there is a issue with our Server"
+    })
+})
+
 app.listen(4000);
