@@ -2,11 +2,11 @@ const express = require("express")
 
 const app = express()
 
-const calculate_requests = 0
+let calculate_requests = 0
 
 function number_of_requests(req,res,next) {
     calculate_requests += 1
-    console.log("no.of requests on server are",calculate_requests)
+    console.log(calculate_requests)
     next()
 }
 
