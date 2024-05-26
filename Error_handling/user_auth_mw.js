@@ -10,7 +10,8 @@ function number_of_requests(req,res,next) {
     next()
 }
 
-app.use(number_of_requests)
+app.use(number_of_requests) /* this middleware is called by every request. so by using app.use no need
+to define it in every request. */
 
 function userMiddleware(req, res, next) {
     const username = req.headers.username;
@@ -20,7 +21,7 @@ function userMiddleware(req, res, next) {
         res.status(400).json({"msg": "invalid user credentials"})
     }
     else{
-        next()
+         next() /* in chain of functions this next will call other function*/
     }
 }
 
@@ -47,7 +48,7 @@ function heartMiddleware(req,res,next){
     }
 }
 
-// this function does the user checks only so it calls usermiddleware only
+// this function does the user checks only so it calls usermiddleware only.
 app.get("/health_checkup", userMiddleware,function(req,res){
 
     // requied logic
@@ -63,8 +64,9 @@ app.get("/kidney_checkup",userMiddleware,kidneyMiddleware,function(req,res){
 })
 
 app.get("/heart_checkup",userMiddleware,heartMiddleware,function(req,res){
-    // req logic
+    // required logic
 
     res.status(200).send("heart checkup successfull")
 })
 
+app.listen(4000);
