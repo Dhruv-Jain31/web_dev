@@ -6,3 +6,14 @@ const express = require("express");
 const zod = require("zod")
 const app = express();
 
+/*we need to define a schema which is expected by the user as a object which has:
+{
+    email: string => dj@gmail.com
+    password: atleast 8 letters
+    country: "IN","US"
+    age: number, min 18yrs
+} */
+
+function validate_input(obj){
+    
+}
