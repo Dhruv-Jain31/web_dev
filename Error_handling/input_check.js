@@ -20,13 +20,14 @@ function validate_input(obj){
     const schema = zod.object({
 
         email: zod.string().email(),
-        password: zod.string().password().min(8),
+        password: zod.string().min(8),
         country: zod.literal("IN").or("US"),
         age: zod.number().min(14),
     })
 
     const response = schema.safeParse(obj);
     console.log(response);
+    return response;
 
 }
 
@@ -36,10 +37,19 @@ app.post("/login",function(req,res){
     const response = validate_input(input)
     if(!response.success){
         res.json({
-            msg: "Invalid Inputs" })
+            "msg": "Invalid Inputs",
+            "errors": response.error.errors
+        });
     }
-    return;
+    else{
+        res.json({
+            "msg": "login successfull",
+            response
+        })
+    }
 
 })
 
-app.listen(4000);
+app.listen(4000, function(){
+    console.log("server running on 4000");
+});
