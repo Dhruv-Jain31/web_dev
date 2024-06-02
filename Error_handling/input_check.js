@@ -6,6 +6,8 @@ const express = require("express");
 const zod = require("zod")
 const app = express();
 
+app.use(express.json());
+
 /*we need to define a schema which is expected by the user as a object which has:
 {
     email: string => dj@gmail.com
@@ -15,5 +17,29 @@ const app = express();
 } */
 
 function validate_input(obj){
-    
+    const schema = zod.object({
+
+        email: zod.string().email(),
+        password: zod.string().password().min(8),
+        country: zod.literal("IN").or("US"),
+        age: zod.number().min(14),
+    })
+
+    const response = schema.safeParse(obj);
+    console.log(response);
+
 }
+
+app.post("/login",function(req,res){
+
+    const input = req.body
+    const response = validate_input(input)
+    if(!response.success){
+        res.json({
+            msg: "Invalid Inputs" })
+    }
+    return;
+
+})
+
+app.listen(4000);
