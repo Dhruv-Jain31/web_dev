@@ -5,12 +5,12 @@ Body - {
 username: string
 password: string
 }
-Returns a json web token with username encrypted
+Returns a json web token with username and password encrypted
 
 2. GET /users
 Headers -
 Authorization header
-Returns an array of all users if user is signed in (token is correct)
+Returns an array of all users if user is signed in except the signend in user. (token is correct)
 Returns 403 status code if not
 */ 
 
@@ -62,23 +62,39 @@ app.post("/signin", function (req, res) {
     });
   }
 
-  var token = jwt.sign({ username: username }, "shhhhh");
+  var token = jwt.sign({ username: username, password: password }, jwtPassword);
   return res.json({
     token,
   });
 });
 
 app.get("/users", function (req, res) {
-  const token = req.headers.authorization;
+  const token = req.headers.authorization; // we'll send the json token as the auth. header
   try {
-    const decoded = jwt.verify(token, jwtPassword);
+    const decoded = jwt.verify(token, jwtPassword); // decoded is the original json object which contains the details 
+    // of the decrypted token. jwt.verify will decrypt the token and will store details in decoded variable
+
     const username = decoded.username;
     // return a list of users other than this username
-  } catch (err) {
+
+    res.json({
+      users: ALL_USERS.filter(function(value){
+        if (value.username == username && value.password == password) {
+          return false;
+        }
+        else{
+          return true;
+        }
+      })
+    })
+  }
+   catch (err) {
     return res.status(403).json({
       msg: "Invalid token",
     });
   }
 });
 
-app.listen(3000)
+app.listen(3000,function(){
+  console.log("server running on 3000");
+})
