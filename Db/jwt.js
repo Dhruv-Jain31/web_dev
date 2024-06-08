@@ -75,11 +75,12 @@ app.get("/users", function (req, res) {
     // of the decrypted token. jwt.verify will decrypt the token and will store details in decoded variable
 
     const username = decoded.username;
-    // return a list of users other than this username
+    const password = decoded.password;
 
+    // return a list of users other than this username
     res.json({
       users: ALL_USERS.filter(function(value){
-        if (value.username == username && value.password == password) {
+        if (value.username == username && value.password == password) {  // in filter function value will take the individual in array.
           return false;
         }
         else{
