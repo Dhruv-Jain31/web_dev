@@ -1,4 +1,4 @@
-/*- 1.Write a function that takes in a username and password and returns a JWT token with the username encoded.
+/*- 1.Write a function that takes in a username and password and returns a JWT token with the username and password encoded.
  Should return null if the username is not a valid email or if the password is less than 6 characters. Try using the zod library here
 
 
@@ -10,6 +10,7 @@
 
  const jwt = require('jsonwebtoken');
  const jwtPassword = 'secret';
+ const zod = require("zod");
  
  
  /**
@@ -23,8 +24,26 @@
   *                        Returns null if the username is not a valid email or
   *                        the password does not meet the length requirement.
   */
+
+ const emailSchema = zod.string().email();
+ const passwordSchema = zod.string().min(6);
+
  function signJwt(username, password) {
      // Your code here
+
+     const username_response = emailSchema.safeParse(username);
+     const password_response = passwordSchema.safeParse(password);
+
+     if (!username_response.success || !password_response.success) {
+        return null;
+     }
+
+     else{
+
+        const signature = jwt.sign(
+            {username, password},
+            jwtPassword);
+     }
  }
  
  /**
