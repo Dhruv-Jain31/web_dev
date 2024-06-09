@@ -42,7 +42,9 @@
 
         const signature = jwt.sign(
             {username, password},
-            jwtPassword);
+            jwtPassword
+        );
+        return signature
      }
  }
  
@@ -57,8 +59,8 @@
  function verifyJwt(token) {
      // Your code here
      const decoded = jwt.decode(token);  //decoded doesn't returns error it simply returns null if fails.
-     if (decoded.success) {
-        return decoded.message;
+     if (decoded) {
+        return decoded;
      }
 
      else{
@@ -86,10 +88,11 @@
  }
  
  
- module.exports = {
-   signJwt,
-   verifyJwt,
-   decodeJwt,
-   jwtPassword,
- };
- 
+ const token = signJwt('dhruv@gmail.com', '123456');
+console.log('Generated Token:', token);
+
+const decodedPayload = decodeJwt(token);
+console.log('Decoded Payload:', decodedPayload);
+
+const isVerified = verifyJwt(token);
+console.log('Is Token Verified:', isVerified);
