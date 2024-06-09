@@ -2,7 +2,7 @@
  Should return null if the username is not a valid email or if the password is less than 6 characters. Try using the zod library here
 
 
- - 2.Write a function that takes a jwt as input and returns true if the jwt can be DECODED (not verified). 
+ - 2.Write a function that takes a jwt as input and returns decoded msg if the jwt can be DECODED (not verified). 
  Return false otherwise
 
 
@@ -50,12 +50,20 @@
   * Verifies a JWT using a secret key.
   *
   * @param {string} token - The JWT string to verify.
-  * @returns {boolean} Returns true if the token is valid and verified using the secret key.
+  * @returns {boolean} Returns decoded message if the token is valid and verified using the secret key.
   *                    Returns false if the token is invalid, expired, or not verified
   *                    using the secret key.
   */
  function verifyJwt(token) {
      // Your code here
+     const decoded = jwt.decode(token);  //decoded doesn't returns error it simply returns null if fails.
+     if (decoded.success) {
+        return decoded.message;
+     }
+
+     else{
+        return false;
+     }
  }
  
  /**
@@ -67,6 +75,14 @@
   */
  function decodeJwt(token) {
      // Your code here
+     let answer = true;
+     try{
+        jwt.verify(token,jwtPassword); // it throws error so we wrap it in try-catch block.
+     }
+     catch (err) {
+        answer = false;
+     }
+     return answer;
  }
  
  
