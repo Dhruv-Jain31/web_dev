@@ -26,3 +26,5 @@ app.use(function(err,req,res,next){
     res.status(404).send({"error":"There is some issue"})
     errorCount = errCount + 1;
 })
+
+app.listen(3600);
