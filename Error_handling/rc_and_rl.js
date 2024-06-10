@@ -24,6 +24,11 @@ app.use(function(req, res, next) {
 // You have been given a numberOfRequestsForUser object to start off with which
 // clears every one second
 
+let numberOfRequestsForUser = {};
+setInterval(() => {
+    numberOfRequestsForUser = {};
+}, 1000) // this will make the object (numberOfRequest...) empty after every second.
+
 app.use(function(req, res, next) {
     const userId = req.headers["userId"];
   
@@ -31,7 +36,7 @@ app.use(function(req, res, next) {
   
       numberOfRequestsForUser[userId] = numberOfRequestsForUser[userId] + 1;
       if (numberOfRequestsForUser[userId] > 5){
-        res.status(404)
+        res.status(404).send("to many requests")
       }
   
       else{
@@ -43,6 +48,7 @@ app.use(function(req, res, next) {
       numberOfRequestsForUser[userId] = 1;
       next();
     }
+    console.log(numberOfRequestsForUser);
 
 })
 
