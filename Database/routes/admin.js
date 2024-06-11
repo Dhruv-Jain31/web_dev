@@ -103,6 +103,8 @@ Copy code
                 "msg" : "Course created successfully",
                 courseId: value.id  // returns the course id from the db.
             })
+
+            console.log(value)  // all the values like title, description etc come in value variable.
         })
 
         .catch(function(err){
@@ -118,6 +120,21 @@ Copy code
 
 router.get('/courses', adminMiddleware, (req, res) => {
     // Implement fetching all courses logic
+    Course.find({})  // returns an array of all courses
+    .then(function(course){
+
+        res.json({
+            courses: course
+        })
+
+    })
+    .catch(function(error){
+
+        res.status(500).json({
+            "msg" : "There is some issue with our server"
+        })
+        
+    })
 });
 
 module.exports = router;
