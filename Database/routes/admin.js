@@ -39,40 +39,60 @@ router.post('/signup', (req, res) => {
 });
 
 
-function validate_input(obj){
-    const schema = zod.object({
+const courseSchema = zod.object({
 
-        title: zod.string(),
-        description: zod.string(),
-        imageLink: zod.string(),
-        price: zod.number()
-    })
+    title: zod.string(),
+    description: zod.string(),
+    imageLink: zod.string(),
+    price: zod.number()
 
-    const response = schema.safeParse(obj);
-    console.log(response);
-    return response;
-
-}
+  });
 
 router.post('/courses', adminMiddleware, (req, res) => {
     // Implement course creation logic
 
-    const input = req.body
-    const response = validate_input(input)
+    const response = courseSchema.safeParse(req.body);
+
     if(!response.success){
         res.status(411).json({
             "msg": "Invalid Inputs",
             "errors": response.error.errors
         });
     }
+
+    /* The response object can have the following structure if validation is successful:
+    {
+  success: true,
+  data: {
+    title: "Course Title",
+    description: "Course Description",
+    imageLink: "http://example.com/image.jpg",
+    price: 100
+  }
+}
+
+If validation fails, response would have an error structure:
+javascript
+Copy code
+{
+  success: false,
+  error: {...}
+}*/
+
     else{
+ // accessing the validated data
+        const validatedData = response.data;
+        const title = validatedData.title;
+        const description = validatedData.description;
+        const imageLink = validatedData.imageLink;
+        const price = validatedData.price;
 
         Course.create({
 
-            title: title,
-            description: description,
-            imageLink: imageLink,
-            price: price
+            title: response.title,
+            description: response.description,
+            imageLink: response.imageLink,
+            price: response.price
 
         })
 
