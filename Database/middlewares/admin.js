@@ -1,4 +1,4 @@
-const { Admin } = require("../Db_schema");  // imports the admin model from database.
+const { Admin } = require("../Db_schema/index.js");  // imports the admin model from database.
 //it is used to interact with the admins collection/table in your database.
 
 // Middleware for handling auth
@@ -7,8 +7,8 @@ function adminMiddleware(req, res, next) {
     // You need to check the headers and validate the admin from the admin DB. 
     //Check readme for the exact headers to be expected
 
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.headers.username;
+    const password = req.headers.password;
 
     Admin.findOne({
         username: username,

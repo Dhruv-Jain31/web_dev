@@ -1,10 +1,9 @@
 const express = require("express");
-const adminMiddleware = require("../middleware/admin");
+const adminMiddleware = require("../middlewares/admin");
 const { Admin } = require("../Db_schema");
 const router = express.Router();
 const zod = require("zod");
-const { title } = require("process");
-const { createDecipheriv } = require("crypto");
+
 
 // Admin Routes
 // it does not mean it handles the signup endpoint. it handles /admin/signup end-point.
@@ -43,10 +42,10 @@ router.post('/signup', (req, res) => {
 function validate_input(obj){
     const schema = zod.object({
 
-        title: zod.string().nonempty({ message: "Title is required" }),
-        description: zod.string().nonempty({ message: "Description is required" }),
-        imageLink: zod.string().url()({ message: "Invalid URL format" }),
-        price: zod.number().positive({ message: "Price must be a positive number" })
+        title: zod.string(),
+        description: zod.string(),
+        imageLink: zod.string(),
+        price: zod.number()
     })
 
     const response = schema.safeParse(obj);
