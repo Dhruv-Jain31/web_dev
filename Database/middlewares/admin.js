@@ -1,4 +1,5 @@
-const { Admin } = require("../Db_schema");  // imports the admin model from databse
+const { Admin } = require("../Db_schema");  // imports the admin model from database.
+//it is used to interact with the admins collection/table in your database.
 
 // Middleware for handling auth
 function adminMiddleware(req, res, next) {
@@ -12,7 +13,7 @@ function adminMiddleware(req, res, next) {
     Admin.findOne({
         username: username,
         password: password
-    })  // returns a promise
+    })  // returns a promise. then method receives the result of the query as its argument (admin). true or false.
     .then(function(admin){
         if(admin){
             next()
