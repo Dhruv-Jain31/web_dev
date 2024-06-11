@@ -1,6 +1,7 @@
 const express = require("express");
 const adminMiddleware = require("../middlewares/admin");
 const { Admin } = require("../Db_schema");
+const { Course } = require("../Db_schema");
 const router = express.Router();
 const zod = require("zod");
 
@@ -89,10 +90,10 @@ Copy code
 
         Course.create({
 
-            title: response.title,
-            description: response.description,
-            imageLink: response.imageLink,
-            price: response.price
+            title: title,
+            description: description,
+            imageLink: imageLink,
+            price:price
 
         })
 
