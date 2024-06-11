@@ -14,7 +14,7 @@ This one doesn't use authentication the right way.
 For this one, in every authenticated requests, you need to send the username and password in the headers (and not the jwt).
 This is the reason why there will be no sign in route.
 
-You need to use mongodb to store all the data persistently.
+Need to use mongodb to store all the data persistently.
 
 ## Routes
 ### Admin Routes:
