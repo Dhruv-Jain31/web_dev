@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const zod = require("zod")
 const userMiddleware = require("../middlewares/user");
+const { User } = require("../Db_schema");
 
 // User Routes
 // it does not mean it handles the signup endpoint. it handles /user/signup end-point.
@@ -57,10 +58,38 @@ router.post('/signup', (req, res) => {
 router.get('/courses', (req, res) => {
     // this end point is open to the world anyone can access it.
     // Implement listing all courses logic
+    Course.find({
+        isPublished:true
+    })
+    .then(function(course){
+        res.json({
+            Courses: course
+        })
+    })
+    .catch(function(error){
+        res.status(500).json({
+            "msg" : "There is some issue with our server"
+        })
+    })
 });
 
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
     // Implement course purchase logic
+    const courseId = req.params.courseId
+    const username = req.headers.username
+
+    User.updateOne({
+        username: username,
+    },{
+        purchasedCourses : {
+            "$push" : courseId
+        }
+    });
+
+    res.json({
+        message: "Purchase completed successfully."
+    })
+
 });
 
 router.get('/purchasedCourses', userMiddleware, (req, res) => {
