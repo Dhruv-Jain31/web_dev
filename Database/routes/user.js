@@ -143,26 +143,42 @@ router.get('/purchasedCourses', userMiddleware, (req, res) => {
     const username = req.headers.username;
 
     User.findOne({
-        username: username,
-    })
-    .then(function(user){
-        if(user){
-            res.json({
-                "Purchased Courses": user.purchasedCourses
-            })
-        }
-        else{
-            res.status(500).json({
-                "msg": "User not found"
-            })
-        }
-    })
-    .catch(function(error){
-        console.error("Error retrieving purchased courses",error)
-        res.status(500).json({
-            "msg" : "Internal server error"
+         username: username
+         })
+        .then(function(user) {
+            if (user) {
+                // Find the courses where the _id is in the user's purchasedCourses array
+                Course.find({ //it will again return a promise
+                    _id: {
+                         "$in": user.purchasedCourses 
+                        }
+                })
+                .then(function(courses) {
+                    res.json({
+                        "msg": "Purchased courses retrieved successfully",
+                        "purchasedCourses": courses
+                    });
+                })
+                .catch(function(error) {
+                    console.error("Error retrieving courses", error);
+                    res.status(500).json({
+                        "msg": "Error retrieving purchased courses",
+                        "error": error
+                    });
+                });
+            } 
+            else {
+                res.status(404).json({ "msg": "User not found" });
+            }
         })
-    })
+        .catch(function(error) {
+            console.error("Error retrieving user", error);
+            res.status(500).json({
+                "msg": "Internal server error",
+                "error": error
+            });
+        });
 });
+
 
 module.exports = router
