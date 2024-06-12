@@ -14,9 +14,14 @@ const UserSchema = new mongoose.Schema({
     // Schema definition here
     username: String,
     password: String,
+
+    /*This field is an array of ObjectIds.
+type: mongoose.Schema.Types.ObjectId indicates that each element in the array is a MongoDB ObjectId.
+ref: 'Course' creates a reference to the Course collection.
+This means each ObjectId in the purchasedCourses array corresponds to a document in the Course collection.*/
     purchasedCourses: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'  // means it refers to the course table.
+        ref: 'Course'
     }]
 });
 

@@ -3,6 +3,8 @@ const router = express.Router();
 const zod = require("zod")
 const userMiddleware = require("../middlewares/user");
 const { User } = require("../Db_schema");
+const { Course } = require("../Db_schema");
+const mongoose = require("mongoose")
 
 // User Routes
 // it does not mean it handles the signup endpoint. it handles /user/signup end-point.
@@ -12,7 +14,7 @@ const { User } = require("../Db_schema");
 const userSchema = zod.object({
 
     username: zod.string().email(),
-    password: zod.string().password(),
+    password: zod.string().min(6),
 
 })
 
@@ -73,21 +75,60 @@ router.get('/courses', (req, res) => {
     })
 });
 
+/*refine method allows adding custom validation logic to the schema. This method takes two arguments:
+A validation function: This function contains the custom logic to validate the value.
+An options object: This object can have properties like message to specify the error message if the validation fails.*/
+
+const courseIdSchema = zod.string().refine(function(value){
+    return mongoose.Types.ObjectId.isValid(value);  // checks if value is a valid mongoDb object id.
+},{
+    message: "Invalid Course id"
+});
+
+const usernameSchema = zod.string()
+
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
     // Implement course purchase logic
-    const courseId = req.params.courseId
-    const username = req.headers.username
+    //validating course id
+    const courseIdResult = courseIdSchema.safeParse(req.params.courseId);
+    if (!courseIdResult.success) {
+        res.status(400).json({
+
+            error: courseIdResult.error
+        });
+    }
+
+    console.log(courseIdResult.data)
+
+    // validating username
+    const usernameResult = usernameSchema.safeParse(req.headers.username);
+    if (!usernameResult.success){
+        res.status(400).json({
+
+            error: usernameResult.error
+
+        });
+    }
+
+    console.log(usernameResult.data)
 
     User.updateOne({
         username: username,
     },{
-        purchasedCourses : {
-            "$push" : courseId
+        "$push" : {
+            purchasedCourses : courseId
         }
-    });
-
-    res.json({
-        message: "Purchase completed successfully."
+    })
+    .then(function(course){
+        res.json({
+            "msg" : "Course Purchased successfully!!"
+        })
+    })
+    .catch(function(err){
+        res.status(500).json({
+            "msg": "Course couldn't be purchased",
+            "error": console.error(err)
+        })
     })
 
 });
