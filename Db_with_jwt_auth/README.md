@@ -3,7 +3,7 @@
 ### Description
 
 Same as the last but  need to use jwts for authentication.
-We have introduced the signgin endpoints for both users and admins.
+We have introduced the signin endpoints for both users and admins.
 For this one, in every authenticated requests, need to send the jwt in headers (Authorization : "Bearer <actual token>").
 You need to use mongodb to store all the data persistently.
 
@@ -21,7 +21,8 @@ You need to use mongodb to store all the data persistently.
   Output: { token: 'your-token' }
 - POST /admin/courses
   Description: Creates a new course.
-  Input: Headers: { 'Authorization': 'Bearer <your-token>' }, Body: { title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com' }
+  Input: Headers: { 'Authorization': 'Bearer <your-token>' }, Body: { title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com' } no need
+  to send username and password now (good practice)
   Output: { message: 'Course created successfully', courseId: "new course id" }
 - GET /admin/courses
   Description: Returns all the courses.
