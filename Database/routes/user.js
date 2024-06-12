@@ -149,7 +149,7 @@ router.get('/purchasedCourses', userMiddleware, (req, res) => {
             if (user) {
                 // Find the courses where the _id is in the user's purchasedCourses array
                 Course.find({ //it will again return a promise
-                    _id: {
+                    _id: {  // find all the courses with _id(as in mongo) in user.purchasedCourses
                          "$in": user.purchasedCourses 
                         }
                 })
