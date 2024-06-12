@@ -98,7 +98,7 @@ router.post('/courses/:courseId', userMiddleware, (req, res) => {
         });
     }
 
-    console.log(courseIdResult.data)
+    console.log("Course ID validated:", courseIdResult);
 
     // validating username
     const usernameResult = usernameSchema.safeParse(req.headers.username);
@@ -110,7 +110,12 @@ router.post('/courses/:courseId', userMiddleware, (req, res) => {
         });
     }
 
-    console.log(usernameResult.data)
+    console.log("Username validated:", usernameResult.data);
+
+
+    //important step need to fetch data from these objects. access the validated data
+    const courseId = courseIdResult.data;
+    const username = usernameResult.data;
 
     User.updateOne({
         username: username,
