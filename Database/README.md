@@ -39,7 +39,7 @@ Need to use mongodb to store all the data persistently.
 - GET /users/courses
   Description: Lists all the courses.
   Input: Headers: { 'username': 'username', 'password': 'password' }
-  Output: { courses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+  Output: { courses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://....', published: true }, ... ] }
 - POST /users/courses/:courseId
   Description: Purchases a course. courseId in the URL path should be replaced with the ID of the course to be purchased.
   Input: Headers: { 'username': 'username', 'password': 'password' }
@@ -47,4 +47,4 @@ Need to use mongodb to store all the data persistently.
 - GET /users/purchasedCourses
   Description: Lists all the courses purchased by the user.
   Input: Headers: { 'username': 'username', 'password': 'password' }
-  Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
+  Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://.....', published: true }, ... ] }
