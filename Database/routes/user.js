@@ -140,6 +140,29 @@ router.post('/courses/:courseId', userMiddleware, (req, res) => {
 
 router.get('/purchasedCourses', userMiddleware, (req, res) => {
     // Implement fetching purchased courses logic
+    const username = req.headers.username;
+
+    User.findOne({
+        username: username,
+    })
+    .then(function(user){
+        if(user){
+            res.json({
+                "Purchased Courses": user.purchasedCourses
+            })
+        }
+        else{
+            res.status(500).json({
+                "msg": "User not found"
+            })
+        }
+    })
+    .catch(function(error){
+        console.error("Error retrieving purchased courses",error)
+        res.status(500).json({
+            "msg" : "Internal server error"
+        })
+    })
 });
 
 module.exports = router
