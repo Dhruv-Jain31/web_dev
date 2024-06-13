@@ -1,6 +1,9 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middlewares/admin");
+const { User } = require("../Db_schema");
+const JWT_SECRET = require("..");
 const router = Router();
+const zod = require("zod")
 
 // Admin Routes
 router.post('/signup', (req, res) => {
@@ -34,6 +37,29 @@ router.post('/signup', (req, res) => {
 
 router.post('/signin', (req, res) => {
     // Implement admin signup logic
+    const username = req.user.username;
+    const password = req.user.password;
+
+    User.find({
+        username: username,
+        password: password
+    })
+    .then(function(value){
+        if(value){
+            const token = jwt.sign({
+                username,
+                password
+            }, JWT_SECRET)
+            res.json({
+                token
+            })
+        }
+        else{
+            res.status(500).json({
+                "msg": "Incorrect email or Password"
+            })
+        }
+    })
 });
 
 router.post('/courses', adminMiddleware, (req, res) => {
