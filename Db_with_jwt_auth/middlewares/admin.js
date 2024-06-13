@@ -11,6 +11,15 @@ function adminMiddleware(req, res, next) {
     // token = Bearer asdedes => ["Bearer", "asdasddr"]
     const words = token.split(" ")
     const jwtToken = words[1] // to get actual token
+    const decodedValue = jwt.verify(jwtToken, secret)
+    if (decodedValue.username) {
+        next();
+    }
+    else{
+        res.status(403).json({
+            msg: "Unauthorized Admin"
+        })
+    }
 }
 
 module.exports = adminMiddleware;
