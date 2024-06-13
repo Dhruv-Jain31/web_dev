@@ -12,7 +12,8 @@ function adminMiddleware(req, res, next) {
     const words = token.split(" ")
     const jwtToken = words[1] // to get actual token
     const decodedValue = jwt.verify(jwtToken, JWT_SECRET);
-    if (decodedValue.username) {
+    console.log(decodedValue)
+    if (decodedValue.username && decodedValue.password) {
         next();
     }
     else{

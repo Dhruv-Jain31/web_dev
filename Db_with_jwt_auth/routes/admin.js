@@ -1,6 +1,7 @@
 const express = require("express");
 const adminMiddleware = require("../middlewares/admin");
 const { Admin } = require("../Db_schema");
+const { Course } = require("../Db_schema");
 const router = express.Router();
 const zod = require("zod")
 const jwt = require("jsonwebtoken");
@@ -71,7 +72,10 @@ router.post('/signin', (req, res) => {
                 password
             }, JWT_SECRET);
 
+            const decode = jwt.decode(token, JWT_SECRET);
+            console.log(decode);
             res.json({
+                "msg": "sign in successfully",
                 token
             })
         }
@@ -84,14 +88,65 @@ router.post('/signin', (req, res) => {
     .catch(function(err){
         res.status(500).json({
             "msg": "internal server error",
-            "error": error.message
+            "error": err.message
         })
     })
 });
 
+const courseSchema = zod.object({
+
+    title: zod.string(),
+    description: zod.string(),
+    imageLink: zod.string(),
+    price: zod.number()
+
+  });
+
 router.post('/courses', adminMiddleware, (req, res) => {
     // Implement course creation logic
+
+    const response = courseSchema.safeParse(req.body);
+
+    if(!response.success){
+        res.status(411).json({
+            "msg": "Invalid Inputs",
+            "errors": response.error.errors
+        });
+    }
+    else{
+ // accessing the validated data
+        const validatedData = response.data;
+        const title = validatedData.title;
+        const description = validatedData.description;
+        const imageLink = validatedData.imageLink;
+        const price = validatedData.price;
+
+        Course.create({
+
+            title: title,
+            description: description,
+            imageLink: imageLink,
+            price:price
+
+        })
+        .then(function(value){
+
+            res.json({
+                "msg" : "Course created successfully",
+                courseId: value.id  // returns the course id from the db.
+            })
+
+            console.log(value)  // all the values like title, description etc come in value variable.
+        })
+        .catch(function(err){
+            res.status(500).json({
+                "msg" : "Course could not be created",
+                "error" : "There is some issue with our server"
+            })
+        })
+    }
 });
+
 
 router.get('/courses', adminMiddleware, (req, res) => {
     // Implement fetching all courses logic
