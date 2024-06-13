@@ -150,6 +150,19 @@ router.post('/courses', adminMiddleware, (req, res) => {
 
 router.get('/courses', adminMiddleware, (req, res) => {
     // Implement fetching all courses logic
+    Course.find({})
+    .then(function(course){
+        res.json({
+            courses: course
+        })
+
+    })
+    .catch(function(error){
+        res.status(500).json({
+            "msg" : "Internal serve error couldn't fetch courses",
+            "error": error
+        })
+    })
 });
 
 module.exports = router;
