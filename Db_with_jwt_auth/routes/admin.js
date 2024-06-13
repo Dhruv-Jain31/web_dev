@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middlewares/admin");
 const { User } = require("../Db_schema");
-const JWT_SECRET = require("..");
 const router = Router();
 const zod = require("zod")
+const { JWT_SECRET } = require("../config.");
 
 // Admin Routes
 router.post('/signup', (req, res) => {
@@ -49,7 +49,8 @@ router.post('/signin', (req, res) => {
             const token = jwt.sign({
                 username,
                 password
-            }, JWT_SECRET)
+            }, JWT_SECRET);
+
             res.json({
                 token
             })
