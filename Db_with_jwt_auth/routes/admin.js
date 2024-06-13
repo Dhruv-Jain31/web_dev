@@ -6,13 +6,30 @@ const zod = require("zod")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const AdminMiddleware = require("../../Database/middlewares/admin");
-const { error } = require("console");
 
 // Admin Routes
+
+const signup_schema = zod.object({
+    username: zod.string().email(),
+    password: zod.string().min(6),
+})
+
 router.post('/signup', (req, res) => {
     // Implement admin signup logic
-    const username = req.body.username;
-    const password = req.body.password;
+
+    const validation = signup_schema.safeParse(req.body)
+
+    //safeParse returns an object with a success property, not a boolean.
+    if(!validation.success){ 
+        res.status(400).json({
+            msg: "There is a validation error",
+            error: validation.error,
+        })
+    }
+
+    const response = validation.data
+    const username = response.username
+    const password = response.password
 
     // Checking whether user exists or not
     Admin.create({
