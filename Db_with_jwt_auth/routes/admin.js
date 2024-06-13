@@ -1,9 +1,12 @@
-const { Router } = require("express");
+const express = require("express");
 const adminMiddleware = require("../middlewares/admin");
-const { User } = require("../Db_schema");
-const router = Router();
+const { Admin } = require("../Db_schema");
+const router = express.Router();
 const zod = require("zod")
-const { JWT_SECRET } = require("../config.");
+const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = require("../config");
+const AdminMiddleware = require("../../Database/middlewares/admin");
+const { error } = require("console");
 
 // Admin Routes
 router.post('/signup', (req, res) => {
@@ -37,10 +40,10 @@ router.post('/signup', (req, res) => {
 
 router.post('/signin', (req, res) => {
     // Implement admin signup logic
-    const username = req.user.username;
-    const password = req.user.password;
+    const username = req.body.username;
+    const password = req.body.password;
 
-    User.find({
+    Admin.findOne({
         username: username,
         password: password
     })
@@ -60,6 +63,12 @@ router.post('/signin', (req, res) => {
                 "msg": "Incorrect email or Password"
             })
         }
+    })
+    .catch(function(err){
+        res.status(500).json({
+            "msg": "internal server error",
+            "error": error.message
+        })
     })
 });
 
