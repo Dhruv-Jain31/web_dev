@@ -6,7 +6,7 @@ const router = express.Router();
 const zod = require("zod")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
-const AdminMiddleware = require("../../Database/middlewares/admin");
+
 
 // Admin Routes
 
