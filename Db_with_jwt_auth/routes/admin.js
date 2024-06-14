@@ -127,7 +127,7 @@ router.post('/courses', adminMiddleware, (req, res) => {
             description: description,
             imageLink: imageLink,
             price:price,
-            isPublished
+            isPublished: isPublished
 
         })
         .then(function(value){

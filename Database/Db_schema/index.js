@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { isPromise } = require('util/types');
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://dhruv:dhruv@cluster0.9nyvtnq.mongodb.net/course_selling_app');
@@ -31,6 +32,7 @@ const CourseSchema = new mongoose.Schema({
     description: String,
     imageLink: String,
     Price: Number,
+    isPublished: Boolean
 });
 
 const Admin = mongoose.model('Admin', AdminSchema);

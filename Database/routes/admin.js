@@ -45,7 +45,8 @@ const courseSchema = zod.object({
     title: zod.string(),
     description: zod.string(),
     imageLink: zod.string(),
-    price: zod.number()
+    price: zod.number(),
+    isPublished: zod.boolean()
 
   });
 
@@ -87,13 +88,15 @@ Copy code
         const description = validatedData.description;
         const imageLink = validatedData.imageLink;
         const price = validatedData.price;
+        const isPublished = validatedData.isPublished;
 
         Course.create({
 
             title: title,
             description: description,
             imageLink: imageLink,
-            price:price
+            price:price,
+            isPublished:isPublished
 
         })
 
