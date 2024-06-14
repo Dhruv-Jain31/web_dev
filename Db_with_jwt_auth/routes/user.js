@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const userMiddleware = require("../middlewares/user");
 const { User } = require("../Db_schema");
 const { Course } = require("../Db_schema");
@@ -135,12 +136,49 @@ router.get('/courses', (req, res) => {
     })
 });
 
+const courseIdSchema = zod.string().refine(function(value){
+    return mongoose.Types.ObjectId.isValid(value);  // checks if value is a valid mongoDb object id.
+},{
+    message: "Invalid Course id"
+});
+
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
     // Implement course purchase logic
-    const username = req.username;
+    const username = req.username; // req body contains the username. userMiddleware passed the info
     const password = req.password;
     console.log(username);
     console.log(password);
+
+    const courseIdResult = courseIdSchema.safeParse(req.params.courseId);
+    if (!courseIdResult.success) {
+        res.status(400).json({
+
+            error: courseIdResult.error
+        });
+    }
+
+    console.log("Course ID validated:", courseIdResult);
+    const courseId = courseIdResult.data
+
+    User.updateOne({
+        username: username,
+    },{
+        "$push" : {
+            purchasedCourses : courseId
+        }
+    })
+    .then(function(course){
+        res.json({
+            "msg" : "Course Purchased successfully!!"
+        })
+    })
+    .catch(function(err){
+        res.status(500).json({
+            "msg": "Course couldn't be purchased",
+            "error": err
+        })
+    })
+
 });
 
 router.get('/purchasedCourses', userMiddleware, (req, res) => {
