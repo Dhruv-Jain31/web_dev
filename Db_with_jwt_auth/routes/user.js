@@ -8,8 +8,44 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 
 // User Routes
+
+const signup_schema = zod.object({
+    username: zod.string().email(),
+    password: zod.string().min(6)
+})
+
 router.post('/signup', (req, res) => {
     // Implement user signup logic
+    const validation = signup_schema.safeParse(req.body);
+
+    if(!validation.success){
+        req.status(400).json({
+            message: "There is Validation error",
+            error: validation.error
+        })
+
+    }
+
+    const response = validation.data;
+    const username = response.username;
+    const password = response.password;
+
+    User.create({
+        username: username,
+        password: password,
+    })
+    .then(function(user){
+        res.json({
+            "msg": "user created successfully",
+            "credentials": user
+        })
+    })
+    .catch(function(err){
+        res.json({
+            "msg": "Some error occured in creating user",
+            "error": err
+        })
+    })
 });
 
 router.post('/signin', (req, res) => {
@@ -22,6 +58,10 @@ router.get('/courses', (req, res) => {
 
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
     // Implement course purchase logic
+    const username = req.username;
+    const password = req.password;
+    console.log(username);
+    console.log(password);
 });
 
 router.get('/purchasedCourses', userMiddleware, (req, res) => {

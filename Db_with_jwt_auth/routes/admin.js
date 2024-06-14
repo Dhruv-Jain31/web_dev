@@ -40,14 +40,12 @@ router.post('/signup', (req, res) => {
 
     .then(function(value){
         res.json({
-
             "msg" : "Admin created successfully"
         });
     })
 
     .catch(function(err){  // try...catch only works for synchronous code. Promises are asynchronous,
                           // and their errors need to be handled using .catch() method only
-
         res.status(500).json({
 
             "msg":"Admin not created",
