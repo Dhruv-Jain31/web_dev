@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("../config");
+const { error } = require("console");
 
 
 // Middleware for handling auth
@@ -10,7 +11,19 @@ function userMiddleware(req, res, next) {
 
     const token = req.headers.authorization; // make authorization lowercase only.
     // token = Bearer asdedes => ["Bearer", "asdasddr"]
+    if (!token) {
+        return res.status(403).json({
+            msg: "No token provided"
+        });
+    }
+
     const words = token.split(" ")
+    if (words.length !== 2 || words[0] !== "Bearer") {
+        return res.status(403).json({
+            msg: "Invalid token format"
+        });
+    }
+
     const jwtToken = words[1] // to get actual token
 
     try{
@@ -20,8 +33,8 @@ function userMiddleware(req, res, next) {
         if (decodedValue.username && decodedValue.password) {
             req.username = decodedValue.username // middleware can also be used to pass the info from one to other
             // puts the value of username in request object.
-
             req.password = decodedValue.password
+
             next();
         }
         else{
@@ -30,11 +43,18 @@ function userMiddleware(req, res, next) {
             })
         }
     }
-    catch(err){
+    catch (err) {
+        if (err.name === "JsonWebTokenError") {
+            return res.status(403).json({
+                msg: "Unauthorized User",
+                error: err.message
+            });
+        }
+        // to Handle other errors
         res.status(500).json({
-            "msg": "Incorrect inputs provided",
-            "error" : err
-        })
+            msg: "Incorrect inputs provided",
+            error: err.message
+        });
     }
 }
 
