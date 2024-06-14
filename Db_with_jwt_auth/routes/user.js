@@ -118,7 +118,21 @@ router.post('/signin', (req, res) => {
 });
 
 router.get('/courses', (req, res) => {
+    // this end point is open to the world anyone can access it.
     // Implement listing all courses logic
+    Course.find({
+        isPublished:true
+    })
+    .then(function(course){
+        res.json({
+            Courses: course
+        })
+    })
+    .catch(function(error){
+        res.status(500).json({
+            "msg" : "There is some issue with our server"
+        })
+    })
 });
 
 router.post('/courses/:courseId', userMiddleware, (req, res) => {
