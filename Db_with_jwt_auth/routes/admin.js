@@ -74,7 +74,7 @@ router.post('/signin', (req, res) => {
             console.log(decode);
             res.json({
                 "msg": "sign in successfully",
-                token
+                "token": "Admin" + " "+ token
             })
         }
         else{

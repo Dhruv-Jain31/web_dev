@@ -106,7 +106,7 @@ router.post('/signin', (req, res) => {
 
             res.json({
                 "msg": "User sign in successful",
-                "token": token
+                "token": "Bearer" + " " + token
             });
         }
     })

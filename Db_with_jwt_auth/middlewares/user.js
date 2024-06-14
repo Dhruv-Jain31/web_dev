@@ -1,7 +1,5 @@
 const jwt = require("jsonwebtoken")
 const { JWT_SECRET } = require("../config");
-const { error } = require("console");
-
 
 // Middleware for handling auth
 function userMiddleware(req, res, next) {
