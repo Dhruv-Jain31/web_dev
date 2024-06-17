@@ -1,6 +1,3 @@
-<!--Dom is all the html elements that renders a html page
-dom manipulation is updating the html dynamically using js-->
-
 <!DOCTYPE html>
 <html>
 
@@ -8,22 +5,31 @@ dom manipulation is updating the html dynamically using js-->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Calculator</title>
-  
 </head>
 
 <script>
-    function populateDiv(){
-        const element = document.getElementById
-        ("final Sum")
-        element.innerHtml = "hello world"
+    function populateDiv() {
+      const a = document.getElementById("firstNumber").value;
+      const b = document.getElementById("secondNumber").value;
+      const finalSumElement = document.getElementById("finalSum");
+
+      // Input validation
+      if (isNaN(a) || isNaN(b)) {
+        alert("Please enter valid numbers only.");
+        return;
+      }
+
+      const sum = parseFloat(a) + parseFloat(b);  // parseFloat for converting string to float
+      finalSumElement.textContent = sum;  //textContent for direct text display
     }
-</script>
+  </script>
 
 <body>
-  <input type = "text" placeholder = "First Number"></input><br></br>
-  <input type = "text" placeholder = "Second Number"></input><br></br>
-  <button onclick = "populateDiv()">calculate sum</button> <br></br>
-  
+  <input id="firstNumber" type="text" placeholder="First Number"></input><br><br>
+  <input id="secondNumber" type="text" placeholder="Second Number"></input><br><br>
+  <button onclick="populateDiv()">Calculate Sum</button><br><br>
+  <div id="finalSum"></div>
+
 </body>
 
 </html>
