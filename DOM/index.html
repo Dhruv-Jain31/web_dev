@@ -1,3 +1,6 @@
+<!--Dom is all the html elements that renders a html page
+dom manipulation is updating the html dynamically using js-->
+
 <!DOCTYPE html>
 <html>
 
@@ -8,10 +11,18 @@
   
 </head>
 
+<script>
+    function populateDiv(){
+        const element = document.getElementById
+        ("final Sum")
+        element.innerHtml = "hello world"
+    }
+</script>
+
 <body>
   <input type = "text" placeholder = "First Number"></input><br></br>
   <input type = "text" placeholder = "Second Number"></input><br></br>
-  <button>calculate sum</button>
+  <button onclick = "populateDiv()">calculate sum</button> <br></br>
   
 </body>
 
