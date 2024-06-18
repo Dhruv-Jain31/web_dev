@@ -19,8 +19,16 @@
         return;
       }
 
-        //fetch it is an async call
+        //fetch it is an async call. hence we need to resolve the promise
         fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+            .then(function(response){
+              response.text()  // this also returns a promise and we must know 
+              // what type of response it would eg: text,json etc.
+                  .then(function(ans){
+                    console.log(ans);
+                    document.getElementById("finalSum").innerHTML = ans;
+                  })
+            })
     }
 </script>
 
