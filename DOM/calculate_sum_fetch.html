@@ -14,20 +14,40 @@
       const finalSumElement = document.getElementById("finalSum");
 
       // Input validation
+      if(a.trim() === "" || b.trim() === ""){
+        alert("Both fields are required");
+        return
+      }
+
       if (isNaN(a) || isNaN(b)) {
         alert("Please enter valid numbers only.");
         return;
       }
 
+      const numA = parseFloat(a);
+      const numB = parseFloat(b);
+
         //fetch it is an async call. hence we need to resolve the promise
-        fetch("https://sum-server.100xdevs.com/sum?a=" + a + "&b=" + b)
+        fetch(`https://sum-server.100xdevs.com/sum?a=${numA}&b=${numB}`)
             .then(function(response){
+              if(!response.ok){
+                throw new Error("Network response was not ok")
+              }
               response.text()  // this also returns a promise and we must know 
               // what type of response it would eg: text,json etc.
                   .then(function(ans){
                     console.log(ans);
                     document.getElementById("finalSum").innerHTML = ans;
                   })
+                  .catch(error=>{
+                    console.error("There was a problem with the fetch operation:", error);
+                    document.getElementById("finalSum").innerHTML = "Error fetching the sum. Pls try again later"
+                  })
+
+            .catch(error =>{
+              console.error("There was a problem with the fetch operation:", error);
+              document.getElementById("finalSum").innerHTML = "Error fetching the sum. Pls try again later"
+            })
             })
     }
 </script>
