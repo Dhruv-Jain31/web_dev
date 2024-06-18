@@ -1,3 +1,7 @@
+<!-- DOM is all the HTML elements that renders a html page
+and DOM manipulation is manipulation or changing the contents of that
+page through javascript. -->
+
 <!DOCTYPE html>
 <html>
 
@@ -22,9 +26,10 @@
       const sum = parseFloat(a) + parseFloat(b);  // parseFloat for converting string to float
       finalSumElement.textContent = sum;  //textContent for direct text display
     }
-  </script>
+</script>
 
 <body>
+  <!--id lets you access the elements using the DOM api-->
   <input id="firstNumber" type="text" placeholder="First Number"></input><br><br>
   <input id="secondNumber" type="text" placeholder="Second Number"></input><br><br>
   <button onclick="populateDiv()">Calculate Sum</button><br><br>
