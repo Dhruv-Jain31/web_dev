@@ -1,3 +1,5 @@
+<!--Implementing debouncing in this case-->
+
 <!DOCTYPE html>
 <html>
 
@@ -8,26 +10,39 @@
 </head>
 
 <script>
+  let timeout;
+  function debouncePopulateDiv(){
+    // Debouncing ensures that a function is only called after a certain amount of time
+    // has passed since the last time it was called. This is useful for preventing functions 
+    //from being called too often. eg: search recomdation in search bar
+    //Throttling ensures that a function is not called more than once within a certain period of time. 
+    //This is useful for preventing functions from being called too often, such as when a user is scrolling through a list.
+
+    clearTimeout(timeout); // it clears the old clock being running and stat the new clock and prevents function being called too often
+    timeout = setTimeout(function(){
+      populateDiv()
+    },4000);
+  }
     function populateDiv() {
       const a = document.getElementById("firstNumber").value;
       const b = document.getElementById("secondNumber").value;
       const c = document.getElementById("thirdNumber").value;
       const finalSumElement = document.getElementById("finalSum");
 
-      // Input validation
-      if(a.trim() === "" || b.trim() === "" || c.trim() ===""){
-        alert("Both fields are required");
-        return
-      }
-
-      if (isNaN(a) || isNaN(b) || isNaN(c)) {
-        alert("Please enter valid numbers only.");
-        return;
-      }
-
       const numA = parseFloat(a);
       const numB = parseFloat(b);
       const numC = parseFloat(c);
+
+      // Input validation
+    if (a.trim() === "" || b.trim() === "" || c.trim() === "") {
+      alert("All fields are required");
+      return;
+    }
+
+    if (isNaN(a) || isNaN(b) || isNaN(c)) {
+      alert("Please enter valid numbers only.");
+      return;
+    }
 
         //fetch it is an async call. hence we need to resolve the promise
         fetch(`https://sum-server.100xdevs.com/interest?principal=${numA}&rate=${numB}&time=${numC}`)
@@ -56,10 +71,9 @@
 
 <body>
   <!--id lets you access the elements using the DOM api-->
-  <input id="firstNumber" type="text" placeholder="Principle amount"></input><br><br>
-  <input id="secondNumber" type="text" placeholder="Rate"></input><br><br>
-  <input id="thirdNumber"  type="text" placeholder="Time in years"></input><br><br>
-  <button onclick="populateDiv()">Simple Interest</button><br><br>
+  <input oninput="debouncePopulateDiv()" id="firstNumber" type="text" placeholder="Principle amount"></input><br><br>
+  <input  oninput="debouncePopulateDiv()" id="secondNumber" type="text" placeholder="Rate"></input><br><br>
+  <input oninput="debouncePopulateDiv()" id="thirdNumber"  type="text" placeholder="Time in years"></input><br><br>
   <div id="finalSum"></div>
 
 </body>
