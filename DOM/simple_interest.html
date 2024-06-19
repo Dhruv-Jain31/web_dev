@@ -4,31 +4,33 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Calculator</title>
+  <title>Simple Interest</title>
 </head>
 
 <script>
     function populateDiv() {
       const a = document.getElementById("firstNumber").value;
       const b = document.getElementById("secondNumber").value;
+      const c = document.getElementById("thirdNumber").value;
       const finalSumElement = document.getElementById("finalSum");
 
       // Input validation
-      if(a.trim() === "" || b.trim() === ""){
+      if(a.trim() === "" || b.trim() === "" || c.trim() ===""){
         alert("Both fields are required");
         return
       }
 
-      if (isNaN(a) || isNaN(b)) {
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
         alert("Please enter valid numbers only.");
         return;
       }
 
       const numA = parseFloat(a);
       const numB = parseFloat(b);
+      const numC = parseFloat(c);
 
         //fetch it is an async call. hence we need to resolve the promise
-        fetch(`https://sum-server.100xdevs.com/sum?a=${numA}&b=${numB}`)
+        fetch(`https://sum-server.100xdevs.com/interest?principal=${numA}&rate=${numB}&time=${numC}`)
             .then(function(response){
               if(!response.ok){
                 throw new Error("Network response was not ok")
@@ -54,10 +56,10 @@
 
 <body>
   <!--id lets you access the elements using the DOM api-->
-  <input id="firstNumber" type="text" placeholder="First Number"></body><br><br>
-  <input id="secondNumber" type="text" placeholder="Second Number"></input><br><br>
-  <input id="thirdNumber"  type="text" placeholder="Third Number"></input><br><br>
-  <button onclick="populateDiv()">Calculate Sum</button><br><br>
+  <input id="firstNumber" type="text" placeholder="Principle amount"></input><br><br>
+  <input id="secondNumber" type="text" placeholder="Rate"></input><br><br>
+  <input id="thirdNumber"  type="text" placeholder="Time in years"></input><br><br>
+  <button onclick="populateDiv()">Simple Interest</button><br><br>
   <div id="finalSum"></div>
 
 </body>
