@@ -4,12 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>Calculator</title>
+  <title>Todo_List</title>
   
 </head>
 
   <script>
-    let globalId = 1;
+    let globalId = 1;  // we assigned id's to diff todo's so that whenever mark as done is called that specific to do is updated
 
     function markAsDone(todoId){
         const parent = document.getElementById(todoId);
@@ -28,7 +28,7 @@
         const thirdGrandChild = document.createElement("button")// creating done button
         thirdGrandChild.innerHTML = "Mark as Done";
 
-        thirdGrandChild.setAttribute("onclick",`markAsDone(${id})`);
+        thirdGrandChild.setAttribute("onclick",`markAsDone(${id})`); // set the attribute of onclick.
 
         // appending all the inner div to outer div
         child.appendChild(firstGrandChild);
@@ -51,7 +51,8 @@
         //   <button></button>
       //</div>
 
-      parent.appendChild(createChild(title, description, globalId++));
+      parent.appendChild(createChild(title, description, globalId++));  // when parent which is actually in the DOM appends child
+      // then only all the child and grand child's reach the DOM.
     }
   </script>  
 
