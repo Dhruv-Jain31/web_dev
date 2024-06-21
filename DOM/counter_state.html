@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -5,21 +6,27 @@
   <div id="buttonParent">
   </div>
   <script>
+    // emulation of a react app. how counter would work under the hood if made in react
+    // initial state
     let state = {
       count: 0
     }
 
+    // only this function updates the global state variable
     function onButtonPress() {
       state.count++;
       buttonComponentReRender()
     }
 
+    // taken care by react
+    // it re renders the DOM i.e re putting the button with the updated state
     function buttonComponentReRender() {
       document.getElementById("buttonParent").innerHTML = "";
       const component = buttonComponent(state.count);
       document.getElementById("buttonParent").appendChild(component);
     }
 
+    // component
     function buttonComponent(count) {
       const button = document.createElement("button");
       button.innerHTML = `Counter ${count}`;
@@ -27,6 +34,7 @@
       return button;
     }
 
+    // first we need to manually re render i.e taking the state and render the component on screen
     buttonComponentReRender();
 
   </script>
