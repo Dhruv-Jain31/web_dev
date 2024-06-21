@@ -12,7 +12,10 @@ function App(){
   // state
   const [count, setCount] = useState(0);
 
-  // it is re rendering which is taken care by react
+  /* it is re rendering which is taken care by react
+   this custom button passes two things to the props
+  count: This is the current state value from App.
+  setCount: This is the function to update the state value in App.*/
   return (
     <div>
       <CustomButton count = {count} setCount = {setCount}></CustomButton>
