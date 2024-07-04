@@ -1,35 +1,40 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// re render happens when a state variable that is being used inside the a component changes, it triggers parent
+// component to re render as well if it is inside parent
+// whenever a parent component re renders it triggers all children to re render irrespective whether some children
+// are static or not
 
+// so we push the state down to minimize re rendering
+
+function App() {
+  const [Title, setTitle] = useState("Dhruv")
+  const [Description, setDescription] = useState("Dj_2")
+
+  function updateTitle() {
+    setTitle("my name is " + Math.random());
+    setDescription("my name is " + Math.floor(Math.random() * 100));
+  }
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    // this cannot return multiple siblings together,
+    // it can only return one sibling at a time.
+    // for multiple siblings they must be wrapped in a fragment/parent.
+    <div>
+      <button onClick={updateTitle}>Click me to see random numbers </button>
+      <Header title = {Title}>  </Header>
+      <Header title = {Description}>  </Header>
+      <Header title = <br></br>>  </Header>
+      <Header title = "Dhruv_jain">  </Header>
+      <Header title = "Dhruv_jain2"> </Header>
+    </div>
   )
+}
+
+function Header({title}){
+  return <div>
+    {title}
+  </div>
 }
 
 export default App
