@@ -3,6 +3,7 @@
 
 // hook
 import { useState } from "react";
+import { Fragment } from "react";
 
 // component. {..} are used to render a state in a component
 //purpose of react is: give it a component, give it a state update the state
@@ -16,14 +17,18 @@ function App(){
    this custom button passes two things to the props
   count: This is the current state value from App.
   setCount: This is the function to update the state value in App.*/
+
   return (
-    <div>
+    // this cannot return multiple siblings together,
+    // it can only return one sibling at a time.
+    // for multiple siblings they must be wrapped in a fragment/parent.
+    <Fragment>
       <CustomButton count = {count} setCount = {setCount}></CustomButton>
       <CustomButton count = {count + 1} setCount = {setCount}></CustomButton>
       <CustomButton count = {count - 1} setCount = {setCount}></CustomButton>
       <CustomButton count = {count * 100} setCount = {setCount}></CustomButton>
 
-    </div>
+    </Fragment>
   )
 }
 
