@@ -1,3 +1,5 @@
+// check no.of re renders in the DOM using react dev tools
+
 import React, {Fragment} from 'react';
 import { useState } from 'react'
 
