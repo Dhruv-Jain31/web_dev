@@ -23,7 +23,7 @@ function App() {
   )
 }
 
-function Header_With_Button(){
+function Header_With_Button(){  // only this part will re render as it has state variables
 
   const [Title, setTitle] = useState("Dhruv")
   const [Description, setDescription] = useState("Dj_2")
