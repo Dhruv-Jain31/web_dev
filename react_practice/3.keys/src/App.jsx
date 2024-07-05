@@ -2,29 +2,30 @@ import { useState } from 'react'
 import React, {Fragement} from 'react'
 import './App.css'
 
-let id = 1;
-
 function App() {
   const [todos, setTodos] = useState([{
-    id: id,
+    id: 1,
     title: "go to gym",
     description: "go to gym today"
   },{
-    id: id++,
+    id: 2,
     title: "do DSA",
     description: "complete arrays"
-  }],{
-    id: id++,
+  },{
+    id: 3,
     title: "go to class",
     description: "study micro processor"
-  })
+  }]);
+
+  const [nextId, setNextId] = useState(4);
 
   function addTodo(){
     setTodos([...todos,{ //spread operator: spreads all the existing and adds the 4th todo
-      id: id++,
+      id: nextId,
       title: Math.random(),
       description: Math.random()
-    }])
+    }]);
+    setNextId(nextId + 1);
   }
 
 
@@ -42,9 +43,6 @@ function App() {
 
 function Todo({title, description}){
   return <div>
-    <i>
-      {id}
-    </i>
     <h1>
       {title}
     </h1>
