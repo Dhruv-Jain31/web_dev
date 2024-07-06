@@ -2,6 +2,8 @@ import { useState } from 'react'
 import React, {Fragment} from 'react'
 import './App.css'
 
+let counter = 4
+
 function App() {
   const [todos, setTodos] = useState([{
     id: 1,
@@ -20,16 +22,15 @@ function App() {
   },
 ]);
 
-  const [nextId, setNextId] = useState(4);
+
 
   function addTodo(){
     setTodos([...todos,{ //spread operator: spreads all the existing and adds the 4th todo
-      id: nextId,
+      id: counter++,
       title: Math.random(),
       description: Math.random()
   }
 ]);
-    setNextId(nextId + 1);
   }
 
 
@@ -38,7 +39,7 @@ function App() {
       <button onClick={addTodo}>Add a todo</button>
 
       {todos.map(function(todo){
-        return <Todo id = {todo.id} title = {todo.title} description = {todo.description} />
+        return <Todo key = {todo.id} title = {todo.title} description = {todo.description} />
       })}
 
     </div>
