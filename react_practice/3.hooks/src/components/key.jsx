@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import React, {Fragment} from 'react'
-import './src/App.css'
+//import './App.css'
 
 let counter = 4
 
-function App() {
+export function App() {
   const [todos, setTodos] = useState([{
     id: 1,
     title: "go to gym",
@@ -64,4 +64,3 @@ function Todo({id, title, description}){
   );
 }
 
-export default App

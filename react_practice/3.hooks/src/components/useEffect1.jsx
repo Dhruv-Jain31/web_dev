@@ -1,8 +1,8 @@
 import {useState, useEffect} from "react";
-import './src/App.css'
+//import './App.css'
 import { Fragment } from "react";
 
-function App(){
+export function App(){
     const [todos, setTodos] = useState("")
 
     useEffect(function(){
@@ -37,4 +37,5 @@ function Todo({title,description,completed}){
 
     </div>
 }
+
 
