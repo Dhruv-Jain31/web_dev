@@ -2,22 +2,24 @@ import {useState, useEffect} from "react";
 //import './App.css'
 import { Fragment } from "react";
 
-export function App(){
-    const [todos, setTodos] = useState("")
+export function UseEffect1(){
+    const [todos, setTodos] = useState([]);
 
     useEffect(function(){
         fetch("https://sum-server.100xdevs.com/todos")
         .then(async function(response){
-            const value = await response.json
+            const value = await response.json();
             setTodos (value.todos);
         })
-    },[])
+    },[]) // [] is the dependency array if it empty it means it will call the function inside once
+    // whenever the component mounts or when there is initial re render
+    //[value] if we provide an array with specific values, the effect will run whenever any of those values change.
 
     return (
         <Fragment>
             {todos.map(function(todos){
                 return <Todo title = {todos.title} description = {todos.description}
-                completed = {todos.completed} />
+                completed = {todos.completed.toString()} />
             })}
         </Fragment>
     )
