@@ -22,6 +22,9 @@ function App() {
   },
 ]);
 
+// id acts as key here. It helps us to uniquely identify array item. In the return function we have given key validation to id.
+// it makes the re rendering easy when a particular change in DOM has happened. Things which are changed are associated
+// with a particular id and hence when change happens re rendering becomes easy
 
 
   function addTodo(){
@@ -37,7 +40,6 @@ function App() {
   return (
     <div>
       <button onClick={addTodo}>Add a todo</button>
-
       {todos.map(function(todo){
         return <Todo key = {todo.id} id = {todo.id} title = {todo.title} description = {todo.description} />
       })}
