@@ -9,7 +9,8 @@ import axios from "axios";
 
 export function UseEffect2(){
     const [id, setId] = useState(1);
-    return <div>
+    return <Fragment>
+    <div>
 
         <button onClick = {function(){
             setId(1)
@@ -32,6 +33,10 @@ export function UseEffect2(){
         }}>5</button>
 
     </div>
+
+    <Todo id = {id} />
+
+    </Fragment>
 }
 
 function Todo({id}){
@@ -42,7 +47,7 @@ function Todo({id}){
         .then(function(response){
             setTodo(response.data.todo);
         })
-    },[id])
+    },[id]) // we passed id as a dependency here. Now this function will run every time the id changes
 
     return <Fragment>
         <h1>
@@ -51,5 +56,8 @@ function Todo({id}){
         <h4>
             {todo.description}
         </h4>
+        <i>
+            {todo.completed.toString()}
+        </i>
     </Fragment>
 }

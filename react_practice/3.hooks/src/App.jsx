@@ -11,7 +11,7 @@ function App() {
       <HashRouter>
         <Routes>
           <Route path="/key" element={<Key />} />
-          <Route path="/useEffect" element={<UseEffect1 />} />
+          <Route path="/useEffect1" element={<UseEffect1 />} />
           <Route path="/useEffect2" element={<UseEffect2 />} />
         </Routes>
       </HashRouter>
