@@ -4,6 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Key } from './Components/Key';
 import { UseEffect1 } from './Components/UseEffect1';
 import { UseEffect2 } from './Components/UseEffect2';
+import { UseMemo } from './Components/UseMemo'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/key" element={<Key />} />
           <Route path="/useEffect1" element={<UseEffect1 />} />
           <Route path="/useEffect2" element={<UseEffect2 />} />
+          <Route path="/useMemo" element={<UseMemo />} />
         </Routes>
       </HashRouter>
     </Fragment>
