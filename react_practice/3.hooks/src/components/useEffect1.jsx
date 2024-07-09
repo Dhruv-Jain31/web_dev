@@ -12,7 +12,8 @@ export function UseEffect1(){
                 const value = await response.json();
                 setTodos(value.todos);
             })
-        },2000)
+        },2000) // set interval will call fetch api every 2 sec but useEffect function is called
+        // only once since dependency array is empty
     },[])
      // [] is the dependency array if it empty it means it will call the function inside once
     // whenever the component mounts or when there is initial re render
