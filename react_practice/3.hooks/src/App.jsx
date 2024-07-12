@@ -5,6 +5,7 @@ import { Key } from './Components/Key';
 import { UseEffect1 } from './Components/UseEffect1';
 import { UseEffect2 } from './Components/UseEffect2';
 import { UseMemo } from './Components/UseMemo'
+import { UseCallback } from './Components/UseCallback'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/useEffect1" element={<UseEffect1 />} />
           <Route path="/useEffect2" element={<UseEffect2 />} />
           <Route path="/useMemo" element={<UseMemo />} />
+          <Route path="/useCallback" element={<UseCallback />} />
         </Routes>
       </HashRouter>
     </Fragment>
