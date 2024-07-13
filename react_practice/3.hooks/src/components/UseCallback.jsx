@@ -1,27 +1,30 @@
+import { memo, useCallback, useState } from "react";
 
-import { memo, useState } from "react";
+export function UseCallback(){
+  const [count, setCount] = useState(0);
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  function onClick() {
-    console.log("child clicked")
+  const inputFunction = function(){
+    console.log("input function called")
   }
 
-  return <div>
-    <Child onClick={onClick} />
-    <button onClick={() => {
-      setCount(count + 1);
-    }}>Click me {count}</button>
-  </div>
+  return (
+    <div>
+      <Button_component inputFunction = {inputFunction}  />
+      <br></br>
+      <button onClick = {function(){
+        setCount(count + 1)
+      }}> Click the button </button>
+    </div>
+  )
 }
 
-const Child = memo(({onClick}) => {
-  console.log("child render")
+const Button_component = memo(function({inputFunction}){
+  console.log("child is rendering")
 
-  return <div>
-    <button onClick={onClick}>Button clicked</button>
-  </div>
+  return (
+    <div>
+      <button>Button is clicked</button>
+    </div>
+  )
 })
 
-export default App;
