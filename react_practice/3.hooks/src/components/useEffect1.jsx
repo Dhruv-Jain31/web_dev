@@ -22,14 +22,17 @@ export function UseEffect1(){
     return (
         <Fragment>
             {todos.map(function(todos){
-                return <Todo title = {todos.title} description = {todos.description}
+                return <Todo_var
+                key = {todos.id}
+                title = {todos.title}
+                description = {todos.description}
                 completed = {todos.completed.toString()} />
             })}
         </Fragment>
     )
 }
 
-function Todo({title,description,completed}){
+const Todo_var = function Todo({title,description,completed}){
     return <div>
     <h2>
     {title}
