@@ -23,6 +23,8 @@ export function Memo_Assignment1() {
                 type="number"
                 value={input}
                 onChange={(e) => setInput(Number(e.target.value))}
+                /*This is an event handler that updates the INPUT state variable whenever
+                the user changes the value in the input field.*/
             />
             <p>Calculated Value: {expensiveValue}</p>
         </div>
