@@ -8,6 +8,8 @@ import { UseMemo } from './Components/UseMemo'
 import { UseCallback } from './Components/UseCallback'
 import { UseRef } from './Components/UseRef'
 
+import { Memo_Assignment1 } from './Assignments/1.Use-Memo/Assignment1';
+
 function App() {
   return (
     <Fragment>
@@ -19,6 +21,8 @@ function App() {
           <Route path="/useMemo" element={<UseMemo />} />
           <Route path="/useCallback" element={<UseCallback />} />
           <Route path="/useRef" element={<UseRef />} />
+
+          <Route path="/usememoAssign1" element={<Memo_Assignment1 />} />
         </Routes>
       </HashRouter>
     </Fragment>
