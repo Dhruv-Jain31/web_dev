@@ -10,12 +10,18 @@ export function Callback_Assignment1() {
 
     // Your code starts here
     const handleIncrement = useCallback( () => {
-        setCount(count + 1);
-    }, [count])
+        setCount(function(count){
+            return count + 1;
+        })
+    }, [])
+    // count is passed as a argument in the function we are not accessing it directly.
+    // we will not pass count in the dependency array and can skip un-necessary re renders of both variables
 
     const handleDecrement = useCallback( () => {
-        setCount(count - 1);
-    }, [count]);
+        setCount(function(count){
+            return count - 1;
+        });
+    }, []);
     // Your code ends here
 
     return (
