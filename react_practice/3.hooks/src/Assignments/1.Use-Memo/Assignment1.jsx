@@ -8,12 +8,14 @@ export function Memo_Assignment1() {
     // Your solution starts here
     const expensiveValue = useMemo(function(){
         let value = 1;
-        for (let i = 0; i<=input; i++){
+        for (let i = 1; i<=input; i++){
             value = value * i
         }
         return value
     }, [input]);
     // Your solution ends here
+
+    console.log(expensiveValue);
 
     return (
         <div>
