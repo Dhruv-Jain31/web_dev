@@ -10,6 +10,7 @@ import { UseRef } from './Components/UseRef'
 
 import { Memo_Assignment1 } from './Assignments/1.Use-Memo/Assignment1';
 import { Memo_Assignment2 } from './Assignments/1.Use-Memo/Assignment2';
+import { Memo_Assignment3 } from './Assignments/1.Use-Memo/Assignment3';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
 
           <Route path="/usememoAssign1" element={<Memo_Assignment1 />} />
           <Route path="/usememoAssign2" element={<Memo_Assignment2 />} />
+          <Route path="/usememoAssign3" element={<Memo_Assignment3 />} />
         </Routes>
       </HashRouter>
     </Fragment>
