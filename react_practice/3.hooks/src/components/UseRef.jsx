@@ -6,6 +6,7 @@ export function UseRef(){
 
     useEffect(function(){
         setTimeout(function(){
+            console.log(divRef.current);
             divRef.current.innerHTML = 100000;
         }, 6000)
     }, [])
