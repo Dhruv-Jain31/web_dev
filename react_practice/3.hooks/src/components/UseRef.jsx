@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
-export function UseRef(){
+export default function UseRef(){
     const [incomeTax, setIncomeTax] = useState(2000);
     const divRef = useRef();  // use ref is used to target a particular DOM element
 

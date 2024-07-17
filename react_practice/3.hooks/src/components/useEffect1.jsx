@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 //import './App.css'
 import { Fragment } from "react";
 
-export function UseEffect1(){
+export default function UseEffect1(){
     const [todos, setTodos] = useState([]);
 
     useEffect(function(){

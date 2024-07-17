@@ -6,7 +6,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { Fragment } from "react";
 
-export function UseMemo(){
+export default function UseMemo(){
     const [counter, setCounter] = useState(0);
     const [value, setValue] = useState(1);
     //const [count, setCount] = useState(1);

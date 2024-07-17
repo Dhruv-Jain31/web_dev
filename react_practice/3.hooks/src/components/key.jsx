@@ -4,7 +4,7 @@ import React, {Fragment} from 'react'
 
 let counter = 4
 
-export function Key() {
+export default function Key() {
   const [todos, setTodos] = useState([{
     id: 1,
     title: "go to gym",

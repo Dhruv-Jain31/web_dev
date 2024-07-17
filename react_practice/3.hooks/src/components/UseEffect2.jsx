@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { Fragment } from 'react';
 import axios from "axios";
 
-export function UseEffect2(){
+export default function UseEffect2(){
     const [id, setId] = useState(1);
     return <Fragment>
     <div>

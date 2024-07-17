@@ -1,6 +1,6 @@
 import { memo, useCallback, useState } from "react";
 
-export function UseCallback(){
+export default function UseCallback(){
   const [count, setCount] = useState(0);
 
   const inputFunction = useCallback(function(){

@@ -1,5 +1,8 @@
 import './App.css';
-import { lazy,Fragment } from 'react';
+// Suspense API => used when there is async component fetching, data fetching.
+// it renders the fallback till the time component is coming. since components are wrapped
+// in lazy loads eventually when they are called
+import { Suspense,lazy,Fragment } from 'react';
 import { Routes, Route, useNavigate, BrowserRouter } from 'react-router-dom';
 
 // lazy allows to us to lazily export the route instead of loading all the routes at once
@@ -10,7 +13,7 @@ const UseEffect1 = lazy(() =>import('./Components/UseEffect1'));
 const UseEffect2 = lazy(() =>import('./Components/UseEffect2'));
 const UseMemo = lazy(() =>import('./Components/UseMemo'));
 const UseCallback = lazy(() =>import('./Components/UseCallback'));
-const UseRef = lazy(() =>import ('./Components/UseRef'));
+const UseRef = lazy(() =>import('./Components/UseRef'));
 
 import { Memo_Assignment1 } from './Assignments/1.Use-Memo/Assignment1';
 import { Memo_Assignment2 } from './Assignments/1.Use-Memo/Assignment2';
@@ -27,12 +30,12 @@ function App() {
       <BrowserRouter>
         <Navigate />
         <Routes>
-          <Route path="/key" element={<Key />} />
-          <Route path="/useEffect1" element={<UseEffect1 />} />
-          <Route path="/useEffect2" element={<UseEffect2 />} />
-          <Route path="/useMemo" element={<UseMemo />} />
-          <Route path="/useCallback" element={<UseCallback />} />
-          <Route path="/useRef" element={<UseRef />} />
+          <Route path="/key" element={<Suspense fallback={"loading..."}><Key /></Suspense>} />
+          <Route path="/useEffect1" element={<Suspense fallback={"loading..."}><UseEffect1 /></Suspense>} />
+          <Route path="/useEffect2" element={<Suspense fallback={"loading..."}><UseEffect2 /></Suspense>} />
+          <Route path="/useMemo" element={<Suspense fallback={"loading..."}><UseMemo /></Suspense>} />
+          <Route path="/useCallback" element={<Suspense fallback={"loading..."}><UseCallback /></Suspense>} />
+          <Route path="/useRef" element={<Suspense fallback={"loading..."}><UseRef /></Suspense>} />
 
           <Route path="/usememoAssign1" element={<Memo_Assignment1 />} />
           <Route path="/usememoAssign2" element={<Memo_Assignment2 />} />
@@ -57,15 +60,15 @@ function Navigate(){
   return <Fragment>
     <div>
           <button onClick={() => {
-            navigate( "/useMemo")
+            navigate( "/UseMemo")
           }}>useMemo</button>
 
           <button onClick={() => {
-            navigate("/useRef")
+            navigate("/UseCallback")
           }}> useCallback </button>
 
           <button onClick={ () => {
-            navigate("/key")
+            navigate("/Key")
           }}> key </button>
         </div>
         <br></br>
