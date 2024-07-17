@@ -23,6 +23,8 @@ export function Callback_Assignment2() {
                 onChange={(e) => setInputText(e.target.value)}
                 placeholder="Enter some text"
             />
+            <br></br>
+            <br></br>
             <Alert showAlert={showAlert} />
         </div>
     );
