@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Create a component that tracks and displays the number of times it has been rendered.
 // Use useRef to create a variable that persists across renders without causing additional renders when it changes.
@@ -14,7 +14,14 @@ export function Ref_Assignment2() {
         forceRender(Math.random());
     };
 
-    number_of_rerenderes.current = number_of_rerenderes.current + 1;
+    useEffect(() => {
+        // Increment the count after the component has rendered
+        number_of_rerenderes.current += 1;
+    });
+
+    //When running in development mode with React.StrictMode, React intentionally
+    // double-invokes certain lifecycle methods (including useEffect) to help identify any side effects.
+    //so we have to wrap it inside a useeffect
 
     return (
         <div>
