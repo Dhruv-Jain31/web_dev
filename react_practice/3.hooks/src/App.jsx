@@ -1,13 +1,16 @@
 import './App.css';
-import { Fragment } from 'react';
+import { lazy,Fragment } from 'react';
 import { Routes, Route, useNavigate, BrowserRouter } from 'react-router-dom';
 
-import { Key } from './Components/Key';
-import { UseEffect1 } from './Components/UseEffect1';
-import { UseEffect2 } from './Components/UseEffect2';
-import { UseMemo } from './Components/UseMemo'
-import { UseCallback } from './Components/UseCallback'
-import { UseRef } from './Components/UseRef'
+// lazy allows to us to lazily export the route instead of loading all the routes at once
+// we can use lazy function and they will load when we'll hit that specific route
+//makes application better optimized. use export default <function_name> when using lazy
+const Key = lazy(() =>import('./Components/Key'));
+const UseEffect1 = lazy(() =>import('./Components/UseEffect1'));
+const UseEffect2 = lazy(() =>import('./Components/UseEffect2'));
+const UseMemo = lazy(() =>import('./Components/UseMemo'));
+const UseCallback = lazy(() =>import('./Components/UseCallback'));
+const UseRef = lazy(() =>import ('./Components/UseRef'));
 
 import { Memo_Assignment1 } from './Assignments/1.Use-Memo/Assignment1';
 import { Memo_Assignment2 } from './Assignments/1.Use-Memo/Assignment2';
