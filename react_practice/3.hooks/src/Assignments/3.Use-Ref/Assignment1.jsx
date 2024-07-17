@@ -7,7 +7,7 @@ export function Ref_Assignment1() {
     const inputRef = useRef();
 
     useEffect(() => {
-        inputRef.current.focus();   // focuses on specified when page is first re rendered
+        inputRef.current.focus()   // focuses on specified when page is first re rendered
     }, []);
 
     const handleButtonClick = () => {
@@ -16,7 +16,7 @@ export function Ref_Assignment1() {
 
     return (
         <div>
-            <input ref={ inputRef } type="text" placeholder="Enter text here" />
+            <input ref={ inputRef } defaultValue="1000" type="text" placeholder="Enter text here" />
             <br></br>
             <br></br>
             <button onClick={handleButtonClick}>Focus Input</button>
