@@ -1,6 +1,6 @@
 import './App.css';
 import { Fragment } from 'react';
-import { HashRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, BrowserRouter } from 'react-router-dom';
 
 import { Key } from './Components/Key';
 import { UseEffect1 } from './Components/UseEffect1';
@@ -18,30 +18,11 @@ import { Ref_Assignment1 } from './Assignments/3.Use-Ref/Assignment1';
 import { Ref_Assignment2 } from './Assignments/3.Use-Ref/Assignment2';
 
 function App() {
-  const navigate = useNavigate();
-
-  // window.href.location reloads the whole client side bundle i.e loads all the files when we go another
-  // route but window.href will not reload the bundle again and again. It is helpful in SPA's.
-  // to use this all the part that is using this navigate must in top level router like <HashRouter> here
 
   return (
     <Fragment>
-        <div>
-          <button onClick={() => {
-            navigate( "/#/useMemo")
-          }}>useMemo</button>
-
-          <button onClick={() => {
-            navigate( "/#/useRef")
-          }}> useCallback </button>
-
-          <button onClick={ () => {
-            navigate("/#/key")
-          }}> key </button>
-        </div>
-        <br></br>
-        <br></br>
-      <HashRouter>
+      <BrowserRouter>
+        <Navigate />
         <Routes>
           <Route path="/key" element={<Key />} />
           <Route path="/useEffect1" element={<UseEffect1 />} />
@@ -58,9 +39,35 @@ function App() {
           <Route path="/userefAssign1" element={<Ref_Assignment1 />} />
           <Route path="/userefAssign2" element={<Ref_Assignment2 />} />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </Fragment>
   );
+}
+
+function Navigate(){
+  const navigate = useNavigate();
+
+  // window.href.location reloads the whole client side bundle i.e loads all the files when we go another
+  // route but window.href will not reload the bundle again and again. It is helpful in SPA's.
+  // to use this all the part that is using this navigate must in top level router like <HashRouter> here
+
+  return <Fragment>
+    <div>
+          <button onClick={() => {
+            navigate( "/useMemo")
+          }}>useMemo</button>
+
+          <button onClick={() => {
+            navigate("/useRef")
+          }}> useCallback </button>
+
+          <button onClick={ () => {
+            navigate("/key")
+          }}> key </button>
+        </div>
+        <br></br>
+        <br></br>
+  </Fragment>
 }
 
 export default App;
