@@ -19,6 +19,21 @@ import { Ref_Assignment2 } from './Assignments/3.Use-Ref/Assignment2';
 function App() {
   return (
     <Fragment>
+        <div>
+          <button onClick={() => {
+            window.location.href = "/#/useMemo"
+          }}>useMemo</button>
+
+          <button onClick={() => {
+            window.location.href = "/#/useRef"
+          }}> useCallback </button>
+
+          <button onClick={ () => {
+            window.location.href = "/#/key"
+          }}> key </button>
+        </div>
+        <br></br>
+        <br></br>
       <HashRouter>
         <Routes>
           <Route path="/key" element={<Key />} />
