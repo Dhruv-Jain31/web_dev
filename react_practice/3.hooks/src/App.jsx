@@ -12,6 +12,7 @@ import { Memo_Assignment1 } from './Assignments/1.Use-Memo/Assignment1';
 import { Memo_Assignment2 } from './Assignments/1.Use-Memo/Assignment2';
 import { Memo_Assignment3 } from './Assignments/1.Use-Memo/Assignment3';
 import { Callback_Assignment1 } from './Assignments/2.Use-Callback/Assignment1';
+import { Callback_Assignment2 } from './Assignments/2.Use-Callback/Assignment2';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/usememoAssign2" element={<Memo_Assignment2 />} />
           <Route path="/usememoAssign3" element={<Memo_Assignment3 />} />
           <Route path="/usecallAssign1" element={<Callback_Assignment1 />} />
+          <Route path="/usecallAssign2" element={<Callback_Assignment2 />} />
         </Routes>
       </HashRouter>
     </Fragment>
