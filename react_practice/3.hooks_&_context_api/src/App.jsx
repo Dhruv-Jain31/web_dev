@@ -75,6 +75,10 @@ function Navigate(){
           <button onClick={ () => {
             navigate("/Key")
           }}> key </button>
+
+          <button onClick={ () => {
+            navigate("/Context")
+          }}>Context_counter</button>
         </div>
         <br></br>
         <br></br>
