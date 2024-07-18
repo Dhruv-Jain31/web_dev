@@ -23,6 +23,8 @@ import { Callback_Assignment2 } from './Assignments/2.Use-Callback/Assignment2';
 import { Ref_Assignment1 } from './Assignments/3.Use-Ref/Assignment1';
 import { Ref_Assignment2 } from './Assignments/3.Use-Ref/Assignment2';
 
+const Context_Counter = lazy(() =>import('./context_api/Counter'));
+
 function App() {
 
   return (
@@ -44,6 +46,9 @@ function App() {
           <Route path="/usecallAssign2" element={<Callback_Assignment2 />} />
           <Route path="/userefAssign1" element={<Ref_Assignment1 />} />
           <Route path="/userefAssign2" element={<Ref_Assignment2 />} />
+
+          <Route path="/Context" element={<Suspense fallback={"loading..."}><Context_Counter /></Suspense>} />
+
         </Routes>
       </BrowserRouter>
     </Fragment>

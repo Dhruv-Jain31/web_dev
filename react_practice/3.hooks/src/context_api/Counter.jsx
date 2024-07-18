@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { CountContext } from "../context"
 
-export default function Counter(){
+export default function Context_Counter(){
     const [counter, setCounter] = useState(0)
 
     // wrap anyone that wants to use the teleported value inside a .provider tag
