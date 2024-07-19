@@ -1,5 +1,5 @@
 
-import { RecoilRoot,useRecoilValue,useRecoilState } from 'recoil'
+import { RecoilRoot,useRecoilValue,useSetRecoilState } from 'recoil'
 import './App.css'
 import { countAtom } from '../store/atoms/count'
 
@@ -28,19 +28,26 @@ function CountRenderer() {
     return <div>
       <b>
         {count}
+        {count % 2 === 0 ? (
+          <div>It is even</div>
+        ) : (
+          <div>It is Odd</div>
+        )}
       </b>
     </div>
 }
 
 function Buttons() {
-  const [count, setCount] = useRecoilState(countAtom)
+  const setCount = useSetRecoilState(countAtom)
+  console.log("button re renders")
+  // useSetRecoilState prevents button component from re rendering
     return <div>
         <button onClick={() => {
-          setCount(count + 1)
+          setCount(count => count + 1)
         }}>Increase</button>
 
         <button onClick={() => {
-          setCount(count - 1)
+          setCount(count => count - 1)
         }}>Decrease</button>
     </div>
 }
