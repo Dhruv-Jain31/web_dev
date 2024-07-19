@@ -1,12 +1,15 @@
 
-import { useRecoilValue,useRecoilState } from 'recoil'
+import { RecoilRoot,useRecoilValue,useRecoilState } from 'recoil'
 import './App.css'
 import { countAtom } from '../store/atoms/count'
 
 export default function Context_Counter(){
     return (
+      // component that are using atom logic, recoil logic etc must be wrapped in a RecoilRoot tag
         <div>
-        <Count/>
+          <RecoilRoot>
+            <Count />
+          </RecoilRoot>
         </div>
     )
 }
