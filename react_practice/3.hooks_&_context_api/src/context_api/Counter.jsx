@@ -17,6 +17,7 @@ export default function Context_Counter(){
 }
 
 function Count({setCounter}) {
+    console.log("count is re rendering")
     return <div>
         <CountRenderer />
         <Buttons setCounter={setCounter} />
