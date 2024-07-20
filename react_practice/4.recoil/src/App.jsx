@@ -1,7 +1,7 @@
 
 import { RecoilRoot,useRecoilValue,useSetRecoilState } from 'recoil'
 import './App.css'
-import { countAtom } from '../store/atoms/count'
+import { countAtom, oddSelector } from '../store/atoms/count'
 
 export default function Context_Counter(){
     return (
@@ -28,13 +28,17 @@ function CountRenderer() {
     return <div>
       <b>
         {count}
-        {count % 2 === 0 ? (
-          <div>It is even</div>
-        ) : (
-          <div>It is Odd</div>
-        )}
+        <OddCountRenderer />
       </b>
     </div>
+}
+
+function OddCountRenderer(){
+  const isOdd = useRecoilValue(oddSelector);
+
+  return <div>
+    {isOdd ? "it is odd" : "it is even"}
+  </div>
 }
 
 function Buttons() {
