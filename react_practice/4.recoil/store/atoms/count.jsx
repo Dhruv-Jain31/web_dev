@@ -5,11 +5,13 @@ export const countAtom = atom({
     default: 0
 });
 
-export const evenSelector = selector({
+export const oddSelector = selector({
     key: "oddSelector",
     get: ({get}) => {
         // we write the logic that whenever above countAtom changes run the below logic
         const count = get(countAtom);
-        return (!count % 2);
+        if (count %2 != 0){
+            return true
+        }
     }
 });
