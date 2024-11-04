@@ -12,6 +12,7 @@ printId("202"); // ID: 202
 type Employee = {
     name: string;
     startDate: Date;
+    organisation: string;
 };
 
 interface Manager {
@@ -23,7 +24,8 @@ type TechLead = Employee & Manager;
 
 const tech_lead: TechLead = {
     name: "Dhruv",
+    startDate: new Date("2024-01-01"),
     department: "Devops",
-    startDate: new Date("2024-01-01")
+    organisation: "xebia"
 }
 console.log(tech_lead);
