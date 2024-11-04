@@ -5,7 +5,7 @@ interface Person {
     greet(phrase: string): void; // means greet is a function with void as return type
 }
 
-class Employee implements Person {
+class employee implements Person {
     name: string;
     age: number;
 
@@ -31,7 +31,7 @@ class Manager implements Person {
     }
 }
 
-const e = new Employee("Dhruv",21);
+const e = new employee("Dhruv",21);
 e.greet("hello there");
 
 const f = new Manager("Dhruv",24);
