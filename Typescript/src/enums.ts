@@ -22,6 +22,14 @@ app.get("/", (req: Request, res: Response) => {
     res.status(ResponseStatus.Success).json({ message: "Request was successful!" });
 });
 
+app.get("/123", (req: Request, res: Response) => {
+    if(!req.query.userId) {
+        res.status(ResponseStatus.Success).json({message: "User ID is requires"});
+        return;
+    }
+
+    res.status(ResponseStatus.Error).json({ message: "Request was successful!"})
+})
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
