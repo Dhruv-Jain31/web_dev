@@ -24,6 +24,31 @@ console.log(output1);
 let output2 = identity<number>(100);
 console.log(output2);
 
+function getFirstElement<T>(arr :T[]): T {
+    return arr[0];
+}
 
+interface teacher{
+    name: string;
+    id: number;
+    present: boolean;
+}
 
+let a1 = getFirstElement<string>(["Dhruv_Jain", "Ram_Gupta"]);
+console.log(a1.toLowerCase());
 
+let a2 = getFirstElement<number>([1,2]);
+console.log(a2);
+
+let a3 = getFirstElement<boolean>([true,false]);
+console.log(a3);
+
+let a4 = getFirstElement<string | number>(["Dhruv_Jain", "Ram_Gupta", 1,2]);
+console.log(a4);
+
+let a5 = getFirstElement<teacher>([
+    {name:"Saroj",id:1,present:false},
+    {name:"Anil",id:2,present:true},
+    {name:"Ravi",id:3,present:true}
+]);
+console.log(a5);
