@@ -10,7 +10,7 @@ async function createUsersTable() {
     console.log("Connected to PostgreSQL");
 
     const result = await client.query(`
-      CREATE TABLE IF NOT EXISTS users_1 (
+      CREATE TABLE IF NOT EXISTS users_2 (
         id SERIAL PRIMARY KEY,
         username VARCHAR(50) UNIQUE NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
