@@ -22,10 +22,10 @@ async function createUsersTable() {
     console.log("Table 'users1' created successfully:", result.command);
   } catch (error) {
     console.error("Error creating table:", error);
-  } finally {
+  } /*finally {
     await client.end();
     console.log("Disconnected from PostgreSQL");
-  }
+  }*/
 }
 
 createUsersTable();
