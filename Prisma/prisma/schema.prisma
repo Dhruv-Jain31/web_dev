@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Users {
-  id Int       @id @default(autoincrement())
+  id Int       @id @default(autoincrement())  //@id specifies that it is the primary key. 
   email String  @unique
   firstname String
   lastname String?  //optional
