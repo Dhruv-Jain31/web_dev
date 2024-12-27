@@ -61,8 +61,7 @@ async function insertData() {
         const email2 = await askQuestion("Enter email for user 2: ");
         const password2 = await askQuestion("Enter password for user 2: ");
 
-        const insert_query = `INSERT INTO users_2 (username, email, password) 
-                             VALUES
+        const insert_query = `INSERT INTO users_2 (username, email, password)                              VALUES
                             ($1, $2, $3),
                             ($4, $5, $6);`;
 
