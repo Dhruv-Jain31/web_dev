@@ -2,10 +2,11 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient(); // gives all the constructs to ts file to interact with the database
 
-async function insertUser(email:string, password:string, firstname:string, lastname:string) {
+async function insertUser(username:string, email:string,firstname:string, lastname:string, password:string) {
     // adding a new user
     const newUser = await prisma.users.create({
         data: {
+            username,
             email,
             password,
             firstname,
@@ -45,9 +46,9 @@ async function updateUser(email: string, {
     console.log("update user:" , update_user);
 }
 
-//insertUser("disha25@gmail.com", "disha@25102002", "Disha", "Jindal")
+insertUser("dishant_25","dishant25@gmail.com", "dishant@25102002", "Dishant", "Sharma");
 
-updateUser("dhruv33@gmail.com",{
-    firstname: "Dhruv20",
-    lastname: "Kapoor"
-}) // this function expects 1st argument as string and second as object
+//updateUser("dhruv33@gmail.com",{
+//    firstname: "Dhruv20",
+//    lastname: "Kapoor"
+//}) // this function expects 1st argument as string and second as object

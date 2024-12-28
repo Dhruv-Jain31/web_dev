@@ -14,7 +14,8 @@ datasource db {
 }
 
 model Users {
-  id Int       @id @default(autoincrement())  //@id specifies that it is the primary key. 
+  id Int       @id @default(autoincrement())  //@id specifies that it is the primary key. @default specifies that it is autoincremented
+  username String @unique
   email String  @unique
   firstname String
   lastname String?  //optional
@@ -24,7 +25,7 @@ model Users {
 model Todo {
   id Int      @id @default(autoincrement())
   title String
+  description String?
   done Boolean @default(false)
-  description String? //optional
   userId Int
 }
