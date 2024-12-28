@@ -46,7 +46,46 @@ async function updateUser(email: string, {
     console.log("update user:" , update_user);
 }
 
-insertUser("dishant_25","dishant25@gmail.com", "dishant@25102002", "Dishant", "Sharma");
+async function insert_todos(title:string, userId: number, description: string) {
+    // adding a new todo
+    const newTodo = await prisma.todo.create({
+        data: {
+            title,
+            userId,
+            description
+        }
+    });
+    console.log("New todo:" , newTodo);
+
+}
+
+async function getTodos(userId: number,) {
+    const todos = await prisma.todo.findMany({
+        where: {
+        userId: userId,
+        },
+    });
+    console.log(todos);
+}
+
+async function getTodosAndUserDetails(userId: number, ) {
+    const todos = await prisma.todo.findMany({
+        where: {
+            userId: userId,
+        },
+        select: {
+            user: true,
+            title: true,
+            description: true
+        }
+    });
+    console.log(todos);
+}
+
+//insertUser("dhruv","dhruv31@gmail.com", "dhruv_32121", "Dhruv", "Jain");
+//insert_todos("Learn Postgres", 2, "Learn Postgres");
+//getTodos(2)
+getTodosAndUserDetails(2);
 
 //updateUser("dhruv33@gmail.com",{
 //    firstname: "Dhruv20",
