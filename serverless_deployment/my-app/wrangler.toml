@@ -24,6 +24,7 @@ enabled = true
 # - https://developers.cloudflare.com/workers/configuration/secrets/
 # [vars]
 # MY_VARIABLE = "production_value"
+# DATABASE_URL = "DATABASE_URL="prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMTY1NTIzNDktNGY5MC00YzAyLWFhYjItM2M0ODZlYzg2ZDM1IiwidGVuYW50X2lkIjoiZjE3NDI5M2QyZmJiNWVjZWU1MzVlOGU1ZTdjMzkwOWU1MGE2OGNlNDc3OTRjMDUyZDBhMDA5NGFmODZiYmYwNiIsImludGVybmFsX3NlY3JldCI6IjZlNzhlZGU3LWUyZmEtNDMxNS04ODlhLWZjMTJiMGI5M2ZlZiJ9.TygOwBxHq3ju1ddJBVQHcKCp8bBy2Z_EnoNeh71DyKA"
 
 # Bind the Workers AI model catalog. Run machine learning models, powered by serverless GPUs, on Cloudflare’s global network
 # Docs: https://developers.cloudflare.com/workers/wrangler/configuration/#workers-ai
