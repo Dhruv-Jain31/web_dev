@@ -34,6 +34,8 @@ function App(){
 
 
 // components that take the state as the input and there html changes dynamically
+//Props basically woh values hain jo parent (App) se pass ki gayi hain.
+//Yahan count aur setCount pass hue hain.
 function CustomButton(props){
 
   // updating the state variable
