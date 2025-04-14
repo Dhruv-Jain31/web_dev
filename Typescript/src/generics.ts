@@ -59,5 +59,5 @@ function logLength<T extends { length: number }>(item: T): void {
 
 logLength("Hello"); // Works: string has a length
 logLength([1, 2, 3]); // Works: array has a length
-//logLength(123); // ❌ Error: number doesn't have a length
+//logLength(123); // Error: number doesn't have a length
 

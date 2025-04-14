@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css"; // Ensure this includes all necessary styles
+import { Inter } from "next/font/google"
+
+//initalizing the font
+const inter = Inter({subsets:["latin"]})
 
 export const metadata: Metadata = {
   title: "Create Dhruv App",
@@ -13,7 +17,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased vsc-initialized"> {/* Keep it simple here */}
+      <body className={inter.className}> {/* adding fonts globally */}
         <div className="p-4 border-b-4 bg-slate-500">
           This is from layout.tsx
         </div>

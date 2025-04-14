@@ -10,7 +10,7 @@ function maxValue(arr: NumberArr) {
     return max;
 }
 
-console.log(maxValue([31, 28, 26]));
+console.log(maxValue([31, 28, 34]));
 
 interface User {
     firstName: string;
