@@ -6,7 +6,7 @@ export default function Signin_Layout({ children }:{
     return (
         <div>
             <div className="border-b text-center">
-            banner for signin page
+            banner for signin page and signup page
             </div>
             {children}
         </div>
