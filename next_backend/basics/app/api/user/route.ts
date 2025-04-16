@@ -14,7 +14,7 @@ export async function POST(req:NextResponse){
     //parse body
     try{
         const body = await req.json();
-    const { username, passoword } = body;
+    const { username, password } = body;
 
     //extracting headers
     const authHeader = req.headers.get("authorization");
@@ -32,6 +32,7 @@ export async function POST(req:NextResponse){
     return NextResponse.json({
         message: "You are signed up",
         username,
+        password,
         queryName: nameParam,
     })
     }
