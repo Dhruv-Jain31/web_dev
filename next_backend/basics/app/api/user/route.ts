@@ -1,20 +1,34 @@
-import { NextResponse } from "next/server"
+import { PrismaClient } from "@prisma/client";
+import { NextRequest, NextResponse } from "next/server"
 
-export function GET() {
+
+const client = new PrismaClient();
+
+export async function GET() {
     //doing validation here
     //hitting database
-    return NextResponse.json({
+    /*return NextResponse.json({
         email: "dj333@gmail.com",
         name:"Dhruv Jain"
+    })*/
+
+    const user = await client.user.findFirst()
+
+    return NextResponse.json({
+        username: user?.username,
+        password: user?.password,
     })
 }
 
 
-export async function POST(req:NextResponse){
+export async function POST(req:NextRequest){
     //parse body
     try{
         const body = await req.json();
     const { username, password } = body;
+    await client.user.create({
+        data:{username: username, password: password},
+    })
 
     //extracting headers
     const authHeader = req.headers.get("authorization");
