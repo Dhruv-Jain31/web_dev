@@ -12,12 +12,13 @@ export async function GET() {
         name:"Dhruv Jain"
     })*/
 
-    const user = await client.user.findFirst()
+   /*const user = await client.user.findFirst()
 
     return NextResponse.json({
         username: user?.username,
         password: user?.password,
-    })
+    })*/
+   //for better fetches we can add this logic directly to the user/page.tsx..
 }
 
 
