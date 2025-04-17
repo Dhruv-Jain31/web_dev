@@ -14,9 +14,9 @@ export default async function User() {
     return (
         <div>
             <div>
-            {data.email}
+            {data.username}
             </div>
-            {data.name}
+            {data.password}
         </div>
     );
 }
