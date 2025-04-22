@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc -b",
+    "build": "tsup",
     "dev": "tsc -b &&  node dist/index.js"
   },
   "keywords": [],
@@ -13,6 +13,8 @@
   "description": "",
   "dependencies": {
     "@types/express": "^5.0.1",
-    "express": "^5.1.0"
+    "esbuild": "^0.25.2",
+    "express": "^5.1.0",
+    "tsup": "^8.4.0"
   }
 }
