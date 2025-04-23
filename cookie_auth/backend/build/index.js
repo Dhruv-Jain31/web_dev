@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cookie_parser_1 = __importDefault(require("cookie-parser")); //used to parse the cookie and get the object
 const cors_1 = __importDefault(require("cors"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const path_1 = __importDefault(require("path"));
 const JWT_SECRET = "test_456";
 const app = (0, express_1.default)();
 app.use((0, cookie_parser_1.default)());
@@ -40,5 +41,8 @@ app.post("/logout", (req, res) => {
     res.json({
         "message": "Logged out successfully!"
     });
+});
+app.get("/", (req, res) => {
+    res.sendFile(path_1.default.join(__dirname, "../src/index.html"));
 });
 app.listen(3000);
