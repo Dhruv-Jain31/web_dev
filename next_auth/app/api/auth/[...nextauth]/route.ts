@@ -41,7 +41,8 @@ const handler = NextAuth({
                 };
             },
         })
-    ]
+    ],
+    secret : process.env.NEXTAUTH_SECRET //When you are encoding or decoding using jwt use this secret
 });
 
 export { handler as GET, handler as POST };
