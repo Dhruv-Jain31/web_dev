@@ -18,6 +18,10 @@ function App() {
     }
   })
 
+  return() => {
+    socket.close()
+  }
+
   if(!socket){
     return <div>
       Loading...
