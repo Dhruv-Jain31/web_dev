@@ -1,0 +1,9 @@
+creating a cluster : kind create cluster --name local
+Delete the cluster : kind delete cluster -n local
+Create the node setup : kind create cluster --config clusters.yml --name local
+getting pods and nodes: kubectl get nodes & kubectl get pods
+see the exact HTTP request that goes out to the API server: kubectl get nodes --v=8
+Start a pod : kubectl run nginx --image=nginx --port=80
+Check the logs : kubectl logs nginx
+Delete a pod:  kubectl delete pod nginx
+Applying the manifest : kubectl apply -f manifest.yml
