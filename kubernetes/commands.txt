@@ -7,3 +7,9 @@ Start a pod : kubectl run nginx --image=nginx --port=80
 Check the logs : kubectl logs nginx
 Delete a pod:  kubectl delete pod nginx
 Applying the manifest : kubectl apply -f manifest.yml
+Create a new namespace: kubectl create namespace backend-team
+Get all the namespaces : kubectl get namespaces
+Get all pods in the namespace: kubectl get pods -n my-namespace
+Get the deployments in the namespace: kubectl get deployment -n backend-team
+Set the default context to be the namespace: kubectl config set-context --current --namespace=backend-team
+
