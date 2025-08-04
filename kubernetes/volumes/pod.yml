@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+spec:
+  containers:
+  - name: mongo
+    image: mongo:4.4
+    command: ["mongod", "--bind_ip_all"]
+    ports:
+    - containerPort: 27017
+    # Defines how volumes are mounted into the container
+volumeMounts:
+  # Specifies a single volume mount for the 'mongo' container
+  - mountPath: "/data/db"
+    # The path inside the container where the volume will be mounted
+    # MongoDB uses /data/db as its default data directory
+    name: nfs-volume
+    # The name of the volume to mount (must match a volume defined in the 'volumes' section)
+
+# Defines the volumes available to the pod
+volumes:
+  # Specifies a single volume for the pod
+  - name: nfs-volume
+    # The name of the volume, referenced by the volumeMounts section
+    persistentVolumeClaim:
+      # Indicates that this volume is backed by a Persistent Volume Claim (PVC)
+      claimName: nfs-pvc
+      # The name of the PVC to bind to (must exist in the same namespace as the pod)

@@ -1,0 +1,98 @@
+# Defines a Persistent Volume resource in Kubernetes
+apiVersion: v1
+kind: PersistentVolume
+
+# Metadata for the Persistent Volume
+metadata:
+  name: nfs-pv
+
+# Specification for the Persistent Volume
+spec:
+  # Storage capacity of the volume
+  capacity:
+    storage: 5Gi
+
+  # Access modes (ReadWriteOnce, ReadOnlyMany, ReadWriteMany)
+  # NFS typically supports ReadWriteMany for multiple pods
+  accessModes:
+    - ReadWriteMany
+
+  # Reclaim policy: what happens when the PV is released
+  # Retain means the PV and data are kept after PVC is deleted
+  persistentVolumeReclaimPolicy: Retain
+
+  # Storage class for dynamic provisioning (optional)
+  storageClassName: nfs-storage
+
+  # Specifies the NFS storage backend
+  nfs:
+    # Address of the NFS server (external to the cluster)
+    server: 192.168.1.100
+    # Path to the exported directory on the NFS server or where data will be stored
+    path: /exports
+
+
+--------
+
+# Defines a Persistent Volume resource in Kubernetes
+apiVersion: v1
+kind: PersistentVolume
+
+# Metadata for the Persistent Volume
+metadata:
+  name: ebs-pv
+
+# Specification for the Persistent Volume
+spec:
+  # Storage capacity
+  capacity:
+    storage: 10Gi
+
+  # Access modes (EBS typically supports ReadWriteOnce)
+  accessModes:
+    - ReadWriteOnce
+
+  # Reclaim policy
+  persistentVolumeReclaimPolicy: Delete
+
+  # Storage class for dynamic provisioning
+  storageClassName: ebs-storage
+
+  # Specifies the AWS EBS volume backend
+  awsElasticBlockStore:
+    # AWS EBS volume ID (created in AWS, external to the cluster)
+    volumeID: vol-1234567890abcdef0
+    # Filesystem type for the EBS volume
+    fsType: ext4
+
+-----------
+
+# Defines a Persistent Volume Claim resource in Kubernetes
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+# Metadata for the PVC, including its name and namespace
+metadata:
+  name: example-pvc
+  namespace: default
+
+# Specification for the PVC
+spec:
+  # Access modes requested for the storage
+  # Must match the access modes of the PV (e.g., ReadWriteOnce, ReadWriteMany)
+  accessModes:
+    - ReadWriteOnce
+
+  # Requested storage capacity
+  resources:
+    requests:
+      storage: 5Gi
+
+  # Optional: Specifies a StorageClass for dynamic provisioning
+  # If omitted, uses the default StorageClass or requires a manually created PV
+  storageClassName: standard
+
+  # Optional: Selector to match specific PVs (e.g., by labels)
+  selector:
+    matchLabels:
+      app: my-storage
