@@ -1,0 +1,29 @@
+# Defines the API version and kind of Kubernetes resource
+apiVersion: v1
+kind: PersistentVolumeClaim
+
+# Metadata for the PVC, including its name and namespace
+metadata:
+  name: csi-pvc
+  # The name of the PVC, referenced by pods in the same namespace
+  # Namespace is not specified, so it defaults to 'default'
+
+# Specification for the PVC
+spec:
+  # Defines the access modes for the storage
+  accessModes:
+    - ReadWriteOnce
+    # The storage can be mounted as read-write by a single node/pod at a time
+    # Suitable for block storage like Vultr's HDD-based storage
+
+  # Specifies the storage resource requirements
+  resources:
+    requests:
+      storage: 40Gi
+      # Requests 40 gibibytes of storage capacity
+
+  # Specifies the StorageClass to use for provisioning the storage
+  storageClassName: vultr-block-storage-hdd
+  # Refers to a StorageClass named 'vultr-block-storage-hdd'
+  # This StorageClass defines how to dynamically provision storage (e.g., on Vultr's block storage)
+  # If not specified, the cluster's default StorageClass would be used (if defined)

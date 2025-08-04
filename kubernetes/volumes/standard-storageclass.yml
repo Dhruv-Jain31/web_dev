@@ -1,0 +1,26 @@
+# Defines the API version and kind of Kubernetes resource
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+
+# Metadata for the StorageClass
+metadata:
+  name: standard
+  # The name of the StorageClass, referenced by PVCs (e.g., storageClassName: standard)
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+    # Optional: Marks this as the default StorageClass for PVCs without a storageClassName
+
+# Specification for the StorageClass
+provisioner: ebs.csi.aws.com
+# Specifies the provisioner, here using the AWS EBS CSI driver
+# Other examples: pd.csi.storage.gke.io (GCP), disk.csi.azure.com (Azure), or a custom CSI driver
+parameters:
+  type: gp2
+  # Specifies the EBS volume type (gp2 = General Purpose SSD)
+  # Other options: io1, io2 (Provisioned IOPS), st1, sc1 (HDD-based)
+reclaimPolicy: Delete
+# Defines what happens to the PV when the PVC is deleted
+# Delete: Removes the PV and underlying storage (e.g., EBS volume)
+# Retain: Keeps the PV and storage for manual reuse
+allowVolumeExpansion: true
+# Allows resizing the PV if the PVC requests more storage (e.g., from 40Gi to 50Gi)

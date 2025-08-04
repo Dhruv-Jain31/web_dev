@@ -5,31 +5,40 @@ kind: PersistentVolume
 # Metadata for the Persistent Volume
 metadata:
   name: nfs-pv
+  # Unique name of the PV within the cluster
 
 # Specification for the Persistent Volume
 spec:
   # Storage capacity of the volume
   capacity:
     storage: 5Gi
+    # Specifies the size of the storage (5 gibibytes)
 
-  # Access modes (ReadWriteOnce, ReadOnlyMany, ReadWriteMany)
-  # NFS typically supports ReadWriteMany for multiple pods
+  # Access modes for the volume
+  # ReadWriteMany allows multiple pods/nodes to read and write simultaneously
   accessModes:
     - ReadWriteMany
+    # Suitable for NFS, which supports shared access
 
-  # Reclaim policy: what happens when the PV is released
-  # Retain means the PV and data are kept after PVC is deleted
+  # Reclaim policy: defines what happens when the bound PVC is deleted
   persistentVolumeReclaimPolicy: Retain
+  # Retain keeps the PV and its data after PVC deletion for manual reuse
+  # Alternatives: Delete (removes PV and data), Recycle (not recommended)
 
-  # Storage class for dynamic provisioning (optional)
+  # StorageClass for matching with PVCs or dynamic provisioning
   storageClassName: nfs-storage
+  # Associates the PV with the 'nfs-storage' StorageClass
+  # Used to match PVCs requesting this StorageClass
+  # Optional for static PVs, but helps with organization and PVC binding
 
   # Specifies the NFS storage backend
   nfs:
     # Address of the NFS server (external to the cluster)
     server: 192.168.1.100
-    # Path to the exported directory on the NFS server or where data will be stored
+    # The IP or hostname of the NFS server hosting the storage
+    # Path to the exported directory on the NFS server where data is stored
     path: /exports
+    # The directory on the NFS server used for persistent storage
 
 
 --------
