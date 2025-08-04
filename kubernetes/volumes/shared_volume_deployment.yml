@@ -1,0 +1,54 @@
+# Defines the API version and kind of Kubernetes resource
+apiVersion: apps/v1
+kind: Deployment
+
+# Metadata for the deployment, including its name
+metadata:
+  name: shared-volume-deployment
+
+# Specification for the deployment
+spec:
+  # Number of pod replicas to maintain
+  replicas: 1
+  
+  # Selector to match pods with specific labels
+  selector:
+    matchLabels:
+      app: shared-volume-app
+
+  # Template for the pods created by this deployment
+  template:
+    # Pod metadata, including labels for identification
+    metadata:
+      labels:
+        app: shared-volume-app
+
+    # Pod specification
+    spec:
+      # List of containers running in the pod
+      containers:
+      # First container: Writer
+      - name: writer
+        image: busybox
+        # Command to write a message to a file in the shared volume
+        command: ["/bin/sh", "-c", "echo 'Hello from Writer Pod' > /data/hello.txt; sleep 3600"]
+        # Mount configuration for the shared volume
+        volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+      # Second container: Reader
+      - name: reader
+        image: busybox
+        # Command to read the file from the shared volume
+        command: ["/bin/sh", "-c", "cat /data/hello.txt; sleep 3600"]
+        # Mount configuration for the shared volume
+        volumeMounts:
+        - name: shared-data
+          mountPath: /data
+
+      # Defines a shared volume accessible by both containers
+      volumes:
+      - name: shared-data
+        # emptyDir volume exists only for the pod's lifetime
+        emptyDir: {}
