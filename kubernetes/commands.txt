@@ -13,4 +13,7 @@ Get all pods in the namespace: kubectl get pods -n my-namespace
 Get the deployments in the namespace: kubectl get deployment -n backend-team
 Set the default context to be the namespace: kubectl config set-context --current --namespace=backend-team
 Get the configmap: kubectl describe configmap ecom-backend-config
-Check the StorageClass details :kubectl get storageclass standard -o yaml
+Check the StorageClass details : kubectl get storageclass standard -o yaml
+Get available storage classes: kubectl get storageclass
+Check the CPU usage: kubectl top pods
+See the hpa average usage: kubectl get hpa

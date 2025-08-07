@@ -1,0 +1,31 @@
+# This defines the API version for the HPA (HorizontalPodAutoscaler)
+apiVersion: autoscaling/v2
+
+# The kind of Kubernetes resource being created
+kind: HorizontalPodAutoscaler
+
+# Metadata contains the name and other identifying information
+metadata:
+  name: cpu-hpa  # Name of the HPA resource
+
+spec:
+  # This tells HPA which Deployment to monitor and scale
+  scaleTargetRef:
+    apiVersion: apps/v1  # API version of the target deployment
+    kind: Deployment     # Type of resource to scale (Deployment in this case)
+    name: cpu-deployment # Name of the deployment to scale
+
+  # Minimum number of pod replicas HPA can scale down to
+  minReplicas: 2
+
+  # Maximum number of pod replicas HPA can scale up to
+  maxReplicas: 5
+
+  # Metrics that the HPA will use to make scaling decisions
+  metrics:
+  - type: Resource        # Indicates that a resource metric (like CPU or memory) is used
+    resource:
+      name: cpu           # We're using the CPU usage as the metric...
+      target:
+        type: Utilization         # The target type is based on utilization percentage....
+        averageUtilization: 50   # HPA will try to keep average CPU usage across all pods at 50%....
