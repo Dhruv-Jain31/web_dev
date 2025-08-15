@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { requestCounter } from "./requestCount";
-import { activeRequestsGauge } from "./activeRequests";
-import { httpRequestDurationMicroseconds } from "./requestTime";
+import { requestCounter } from "./metrics/requestCount";
+import { activeRequestsGauge } from "./metrics/activeRequests";
+import { httpRequestDurationMicroseconds } from "./metrics/requestTime";
 
 export const metricsMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const startTime = Date.now();
