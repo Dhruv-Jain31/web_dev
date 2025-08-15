@@ -1,30 +1,35 @@
-import { NextFunction, Request, Response } from "express";
-import { requestCounter } from "./metrics/requestCount";
-import { activeRequestsGauge } from "./metrics/activeRequests";
-import { httpRequestDurationMicroseconds } from "./metrics/requestTime";
+import express from "express";
+import { middleware } from "./middleware";
+import client from "prom-client";
+import { metricsMiddleware } from "./metrics";
 
-export const metricsMiddleware = (req: Request, res: Response, next: NextFunction) => {
-    const startTime = Date.now();
-    activeRequestsGauge.inc();
+const app = express();
 
-    res.on('finish', function() {
-        const endTime = Date.now();
-        const duration = endTime - startTime;
-    
-        // Increment request counter
-        requestCounter.inc({
-            method: req.method,
-            route: req.route ? req.route.path : req.path,
-            status_code: res.statusCode
-        });
+app.use(express.json());
+app.use(middleware);
+app.use(metricsMiddleware);
 
-        httpRequestDurationMicroseconds.observe({
-            method: req.method,
-            route: req.route ? req.route.path : req.path,
-            code: res.statusCode
-        }, duration);
+app.get("/user", async (req, res) => {
 
-        activeRequestsGauge.dec();
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    res.send({
+        name: "John Doe",
+        age: 25,
     });
-    next();
-}
+});
+
+app.post("/user", (req, res) => {
+    const user = req.body;
+    res.send({
+        ...user,
+        id: 1,
+    });
+});
+
+app.get("/metrics", async (req, res) => {
+    const metrics = await client.register.metrics();
+    res.set('Content-Type', client.register.contentType);
+    res.end(metrics);
+})
+
+app.listen(4000);
