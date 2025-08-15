@@ -11,6 +11,7 @@ Create a new namespace: kubectl create namespace backend-team
 Get all the namespaces : kubectl get namespaces
 Get all pods in the namespace: kubectl get pods -n my-namespace
 Get the deployments in the namespace: kubectl get deployment -n backend-team
+allows to directly edit the live deployment manifest: kubectl edit deployment test-app -n default
 Set the default context to be the namespace: kubectl config set-context --current --namespace=backend-team
 Get the configmap: kubectl describe configmap ecom-backend-config
 Check the StorageClass details : kubectl get storageclass standard -o yaml

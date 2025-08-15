@@ -15,7 +15,7 @@ spec:
     # Specifies the size of the storage (5 gibibytes)
 
   # Access modes for the volume
-  # ReadWriteMany allows multiple pods/nodes to read and write simultaneously
+  # ReadWriteMany(RWX) allows multiple pods/nodes to read and write simultaneously
   accessModes:
     - ReadWriteMany
     # Suitable for NFS, which supports shared access
